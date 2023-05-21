@@ -95,3 +95,6 @@ class Book(models.Model):
         verbose_name = 'Year publishing book',
         max_length = 50
     )
+    
+    def __str__(self) -> str:
+        return self.name
