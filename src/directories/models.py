@@ -14,7 +14,7 @@ class Autor(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return self.autor_name
     
 
 class Series(models.Model):
@@ -29,7 +29,7 @@ class Series(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return self.series_name
 
 
 class Genre(models.Model):
@@ -44,7 +44,7 @@ class Genre(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return self.genre_name
 
 
 class Publishing_House(models.Model):
@@ -59,7 +59,7 @@ class Publishing_House(models.Model):
     )
 
     def __str__(self) -> str:
-        return self.name
+        return self.publishing_house_name
     
 
 class Book(models.Model):
@@ -97,4 +97,4 @@ class Book(models.Model):
     )
     
     def __str__(self) -> str:
-        return self.name
+        return self.book_name
