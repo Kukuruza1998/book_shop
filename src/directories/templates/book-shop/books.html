@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autor</title>
+</head>
+<body>
+  <form action="/">
+    <button>Back</button>
+  </form>
+  {% for object in objects %}
+    <div>
+      <ul>
+        <p style="font-size: 20px;font-weight: bold;">Book №{{object.pk}}</p>
+        <li>Book name: {{object.book_name}}</li>
+        <li>book image: {{object.book_image}}</li>
+        <li>book price: {{object.book_price}}</li>
+        <li>autor: {{object.autor}}</li>
+        <li>series: {{object.series}}</li>
+        <li>genre: {{object.genre}}</li>
+        <li>book publishing: {{object.year_publishing}}</li>
+        <li>book page: {{object.page}}</li>
+        <li>binding: {{object.binding}}</li>
+        <li>book format: {{object.format_book}}</li>
+        <li>ISBN: {{object.ISBN}}</li>
+        <li>weight: {{object.weight}}</li>
+        <li>book age restrictions: {{object.age_restrictions}}</li>
+        <li>publishing_house: {{object.publishing_house}}</li>
+        <li>counter_book: {{object.counter_book}}</li>
+        <li>active: {{object.active}}</li>
+        <li>book rating: {{object.rating}}</li>
+      </ul>
+    </div>
+  {%endfor%}
+  
+</body>
+</html>
