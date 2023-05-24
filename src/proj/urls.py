@@ -21,9 +21,9 @@ from directories import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home_page),
-    path('autors/', views.autors),
-    path('genres/', views.genres),
-    path('publishing_house/', views.publishing_house),
-    path('series/', views.series),
-    path('books/', views.books),
+    path('autors.html', views.autors),
+    path('genres.html', views.genres),
+    path('publishing_house.html', views.publishing_house),
+    path('series.html', views.series),
+    path('books.html', views.books),
 ]

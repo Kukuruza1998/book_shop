@@ -17,21 +17,6 @@ class Autor(models.Model):
         return self.autor_name
     
 
-class Series(models.Model):
-    series_name = models.CharField(
-        verbose_name = 'Series',
-        max_length = 100
-    )
-    series_description = models.TextField(
-        verbose_name = "Count book's series",
-        null = True,
-        blank = True
-    )
-
-    def __str__(self) -> str:
-        return self.series_name
-
-
 class Genre(models.Model):
     genre_name = models.CharField(
         verbose_name = 'Genre',
@@ -61,6 +46,21 @@ class Publishing_House(models.Model):
     def __str__(self) -> str:
         return self.publishing_house_name
     
+
+class Series(models.Model):
+    series_name = models.CharField(
+        verbose_name = 'Series',
+        max_length = 100
+    )
+    series_description = models.TextField(
+        verbose_name = "Count book's series",
+        null = True,
+        blank = True
+    )
+
+    def __str__(self) -> str:
+        return self.series_name
+
 
 class Book(models.Model):
     book_name = models.CharField(
