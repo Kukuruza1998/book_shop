@@ -21,7 +21,7 @@ class AutorsView(generic.ListView):
 
 class DeleteAutorsView(generic.DeleteView):
     model = models.Autor
-    template_name = "book-shop/autor/delete_autors.html",
+    template_name = "book-shop/autor/delete_autors.html"
     success_url = '/success'
 
 class AddAutorsView(generic.CreateView):
@@ -29,14 +29,14 @@ class AddAutorsView(generic.CreateView):
     fields = [
         'autor_name', 'autor_description'
     ]
-    template_name = "book-shop/autor/add_autors.html",   
+    template_name = "book-shop/autor/add_autors.html" 
         
 class UpdateAutorsView(generic.UpdateView):
     model = models.Autor
     fields = [
         'autor_name', 'autor_description'
     ]
-    template_name = "book-shop/autor/update_autors.html", 
+    template_name = "book-shop/autor/update_autors.html"
 
 
 
