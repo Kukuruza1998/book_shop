@@ -16,22 +16,22 @@ class HomePage(generic.TemplateView):
 
 #Autor
 class AutorsView(generic.ListView):
-    autors = models.Autor
+    model = models.Autor
     template_name = "book-shop/autor/autors.html"
 
 class DeleteAutorsView(generic.DeleteView):
-    autors = models.Autor
+    model = models.Autor
     template_name = "book-shop/autor/delete_autors.html"
 
 class AddAutorsView(generic.CreateView):
-    autors = models.Autor
+    model = models.Autor
     fields = [
         'autor_name', 'autor_description'
     ]
     template_name = "book-shop/autor/add_autors.html",   
         
 class UpdateAutorsView(generic.UpdateView):
-    autors = models.Autor
+    model = models.Autor
     fields = [
         'autor_name', 'autor_description'
     ]
