@@ -10,15 +10,12 @@
   <form action="/">
     <button>Back</button>
   </form>
-  {% for object in objects %}
-    <div>
-      <ul>
-        <p style="font-size: 130%;font-weight: bold;">Genre №{{object.pk}}</p>
-        <li>Genre name: {{object.genre_name}}</li>
-        <li>genre description: {{object.genre_description}}</li>
-      </ul>
-    </div>
-  {%endfor%}
+    <p style="font-size: 130%;font-weight: bold;">Create a new genre</p>
+    <form action="" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Create</button>
+    </form>
 
 </body>
 </html>

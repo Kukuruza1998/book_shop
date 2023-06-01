@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autor</title>
+</head>
+<body>
+  <form action="/">
+    <button>Back</button>
+  </form>
+  {% for object in object_list %}
+    <div>
+      <ul>
+        <p style="font-size: 130%;font-weight: bold;">Autor №{{object.pk}}</p>
+        <li>Autor name: {{object.autor_name}}</li>
+        <li>autor description: {{object.autor_description}}</li>
+      </ul>
+    </div>
+  {%endfor%}
+  
+</body>
+</html>

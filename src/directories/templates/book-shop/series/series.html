@@ -4,21 +4,21 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autor</title>
+  <title>Series</title>
 </head>
 <body>
   <form action="/">
     <button>Back</button>
   </form>
-  {% for object in objects %}
+  {% for object in object_list %}
     <div>
       <ul>
-        <p style="font-size: 130%;font-weight: bold;">Autor №{{object.pk}}</p>
-        <li>Autor name: {{object.autor_name}}</li>
-        <li>autor description: {{object.autor_description}}</li>
+        <p style="font-size: 130%;font-weight: bold;">Series №{{object.pk}}</p>
+        <li>Series name: {{object.series_name}}</li>
+        <li>series description: {{object.series_description}}</li>
       </ul>
     </div>
   {%endfor%}
-  
+
 </body>
 </html>
