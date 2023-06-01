@@ -10,12 +10,21 @@
   <form action="/">
     <button>Back</button>
   </form>
+  <form action="/create_publishing_house.html">
+    <button>Add</button>
+  </form>
   {% for object in object_list %}
     <div>
       <ul>
         <p style="font-size: 130%;font-weight: bold;">Publishing house №{{object.pk}}</p>
         <li>Publishing house name: {{object.publishing_house_name}}</li>
         <li>publishing house description: {{object.publishing_house_description}}</li>
+        <form action="/update_publishing_house.html/{{object.pk}}">
+          <button>Edit</button>
+        </form>
+        <form action="/delete_publishing_house.html/{{object.pk}}">
+          <button>Delete</button>
+        </form>
       </ul>
     </div>
   {%endfor%}

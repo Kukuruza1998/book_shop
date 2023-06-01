@@ -10,12 +10,21 @@
   <form action="/">
     <button>Back</button>
   </form>
+  <form action="/create_series.html">
+    <button>Add</button>
+  </form>
   {% for object in object_list %}
     <div>
       <ul>
         <p style="font-size: 130%;font-weight: bold;">Series №{{object.pk}}</p>
         <li>Series name: {{object.series_name}}</li>
         <li>series description: {{object.series_description}}</li>
+        <form action="/update_series.html/{{object.pk}}">
+          <button>Edit</button>
+        </form>
+        <form action="/delete_series.html/{{object.pk}}">
+          <button>Delete</button>
+        </form>
       </ul>
     </div>
   {%endfor%}

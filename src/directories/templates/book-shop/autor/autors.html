@@ -10,12 +10,21 @@
   <form action="/">
     <button>Back</button>
   </form>
+  <form action="/add_autors.html">
+    <button>Add</button>
+  </form>
   {% for object in object_list %}
     <div>
       <ul>
         <p style="font-size: 130%;font-weight: bold;">Autor №{{object.pk}}</p>
         <li>Autor name: {{object.autor_name}}</li>
         <li>autor description: {{object.autor_description}}</li>
+        <form action="/update_autors.html/{{object.pk}}">
+          <button>Edit</button>
+        </form>
+        <form action="/delete_autors.html/{{object.pk}}">
+          <button>Delete</button>
+        </form>
       </ul>
     </div>
   {%endfor%}

@@ -10,6 +10,9 @@
   <form action="/">
     <button>Back</button>
   </form>
+  <form action="/create_books.html">
+    <button>Add</button>
+  </form>
   {% for object in object_list %}
     <div>
       <ul>
@@ -31,6 +34,12 @@
         <li>counter_book: {{object.counter_book}}</li>
         <li>active: {{object.active}}</li>
         <li>book rating: {{object.rating}}</li>
+        <form action="/update_books.html/{{object.pk}}">
+          <button>Edit</button>
+        </form>
+        <form action="/delete_books.html/{{object.pk}}">
+          <button>Delete</button>
+        </form>
       </ul>
     </div>
   {%endfor%}
