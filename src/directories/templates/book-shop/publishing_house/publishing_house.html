@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publishing house</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block TITLE %}Publishing house{% endblock TITLE %}
+
+{% block BODY %}
   <form action="/">
     <button>Back</button>
   </form>
-  <form action="/create_publishing_house.html">
+  <form action="{% url 'directories:create-publishing-house' %}">
     <button>Add</button>
   </form>
   {% for object in object_list %}
@@ -19,15 +15,13 @@
         <p style="font-size: 130%;font-weight: bold;">Publishing house №{{object.pk}}</p>
         <li>Publishing house name: {{object.publishing_house_name}}</li>
         <li>publishing house description: {{object.publishing_house_description}}</li>
-        <form action="/update_publishing_house.html/{{object.pk}}">
+        <form action="{% url 'directories:update-publishing-house' pk=object.pk %}">
           <button>Edit</button>
         </form>
-        <form action="/delete_publishing_house.html/{{object.pk}}">
+        <form action="{% url 'directories:delete-publishing-house' pk=object.pk %}">
           <button>Delete</button>
         </form>
       </ul>
     </div>
   {%endfor%}
-
-</body>
-</html>
+{% endblock BODY %}

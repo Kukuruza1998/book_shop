@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Autor</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block TITLE %}Autor{% endblock TITLE %}
+
+{% block BODY %}
   <form action="/">
     <button>Back</button>
   </form>
-  <form action="/add_autors.html">
+  <form action="{% url 'directories:add-autors' %}">
     <button>Add</button>
   </form>
   {% for object in object_list %}
@@ -19,15 +15,13 @@
         <p style="font-size: 130%;font-weight: bold;">Autor №{{object.pk}}</p>
         <li>Autor name: {{object.autor_name}}</li>
         <li>autor description: {{object.autor_description}}</li>
-        <form action="/update_autors.html/{{object.pk}}">
+        <form action="{% url 'directories:update-autors' pk=object.pk %}">
           <button>Edit</button>
         </form>
-        <form action="/delete_autors.html/{{object.pk}}">
+        <form action="{% url 'directories:delete-autors' pk=object.pk %}">
           <button>Delete</button>
         </form>
       </ul>
     </div>
   {%endfor%}
-  
-</body>
-</html>
+{% endblock BODY %} 

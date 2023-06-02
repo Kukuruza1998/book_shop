@@ -6,14 +6,6 @@ from django.views import generic
 
 from . import models
 
-
-#Homepage
-
-class HomePage(generic.TemplateView):
-    template_name = "book-shop/home-page.html"
-
-
-
 #Autor
 class AutorsView(generic.ListView):
     model = models.Autor

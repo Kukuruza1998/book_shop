@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Series</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block TITLE %}Series{% endblock TITLE %}
+
+{% block BODY %}
   <form action="/">
     <button>Back</button>
   </form>
-  <form action="/create_series.html">
+  <form action="{% url 'directories:create-series' %}">
     <button>Add</button>
   </form>
   {% for object in object_list %}
@@ -19,15 +15,13 @@
         <p style="font-size: 130%;font-weight: bold;">Series №{{object.pk}}</p>
         <li>Series name: {{object.series_name}}</li>
         <li>series description: {{object.series_description}}</li>
-        <form action="/update_series.html/{{object.pk}}">
+        <form action="{% url 'directories:update-series' pk=object.pk %}">
           <button>Edit</button>
         </form>
-        <form action="/delete_series.html/{{object.pk}}">
+        <form action="{% url 'directories:delete-series' pk=object.pk %}">
           <button>Delete</button>
         </form>
       </ul>
     </div>
   {%endfor%}
-
-</body>
-</html>
+{% endblock BODY %}

@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse_lazy
 
 # Create your models here.
 
@@ -17,7 +18,8 @@ class Autor(models.Model):
         return self.autor_name
     
     def get_absolute_url(self):
-        return '/success'
+        return reverse_lazy('directories:success-page')
+    #return reverse_lazy('directories:success-page'), kwargs={"pk": self.pk}
     
 
 class Genre(models.Model):
@@ -35,7 +37,7 @@ class Genre(models.Model):
         return self.genre_name
     
     def get_absolute_url(self):
-        return '/success'
+        return reverse_lazy('directories:success-page')
 
 
 class Publishing_House(models.Model):
@@ -53,7 +55,7 @@ class Publishing_House(models.Model):
         return self.publishing_house_name
     
     def get_absolute_url(self):
-        return '/success'
+        return reverse_lazy('directories:success-page')
     
 
 class Series(models.Model):
@@ -71,7 +73,7 @@ class Series(models.Model):
         return self.series_name
     
     def get_absolute_url(self):
-        return '/success'
+        return reverse_lazy('directories:success-page')
 
 
 class Book(models.Model):
@@ -186,4 +188,4 @@ class Book(models.Model):
         return self.book_name
     
     def get_absolute_url(self):
-        return '/success'
+        return reverse_lazy('directories:success-page')
