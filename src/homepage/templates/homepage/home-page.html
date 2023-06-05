@@ -1,81 +1,50 @@
 {% extends 'base.html' %}
 
-{% block TITLE %}Homepage{% endblock TITLE %}
+{% block TITLE %}BooShop{% endblock TITLE %}
 
 {% block BODY %}
-<div style=" width: 15%; height: 15%; margin: 3%; background-color: #EBEBEB;">
-  <div style="width: 100%;">
-    <div style="margin: 4% 0;">
+  <form action="{% url 'directories:create-book' %}">
+    <button>Add</button>
+  </form>
 
-      <form action="{% url "directories:autors-view" %}">
-        <button onmouseover = "this.style.backgroundColor='white'"
-          onmouseout = "this.style.backgroundColor='#EBEBEB'"
-          style="padding: 3%; width: 100%; height: 10%; border-radius: 20% 10%; cursor: pointer;">
-          <b style="font-size: 1vw;">
-            Autors
-          </b>
-        </button>
-      </form>
+  <div class="container-book">
+    {% for object in object_list %}
+    <div class="book-block">
+      <div class="card" style="width: 18rem;">
+        <img src="{{object.book_image}}" class="card-img-top" alt="">
+      
+        <div class="card-body">
+          <h5 class="card-title">{{object.book_name}}</h5>
+          <p class="card-text">
+            Book price: {{object.book_price}} BYN
+          </p>
+        </div>
+        <div class="card-body">
+          <img src="{{object.book_image}}" alt=" ">
+        </div>
+        <div class="card-body">
+          Book rating: {{object.rating}}<br>
+          Autor: {{object.autor}}<br>
+          Series: {{object.series}}<br>
+          Genre: {{object.genre}}<br>
+          Book publishing: {{object.year_publishing}}<br>
+          Book page: {{object.page}}<br>
+          Binding: {{object.binding}}<br>
+          Book format: {{object.format_book}}<br>
+          ISBN: {{object.ISBN}}<br>
+          Weight: {{object.weight}}<br>
+          Book age restrictions: {{object.age_restrictions}}<br>
+          Publishing_house: {{object.publishing_house}}<br>
+          Counter_book: {{object.counter_book}}<br>
+          Active: {{object.active}}
+        </div>
 
+        <a href="{% url 'directories:update-book' pk=object.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'directories:delete-book' pk=object.pk %}" class="btn btn-primary">Delete</a>
+      
+      </div>
     </div>
   
-    <div style="margin: 4% 0;">
-
-      <form action="{% url "directories:genre-list-view" %}">
-        <button onmouseover = "this.style.backgroundColor='white'"
-          onmouseout = "this.style.backgroundColor='#EBEBEB'"
-          style="padding: 3%; width: 100%; height: 10%; border-radius: 20% 10%; cursor: pointer;">
-          
-          <b style="font-size: 1vw;">
-            Genres
-          </b>
-        </button>
-      </form>
-
-    </div>
-
-    <div style="margin: 4% 0;">
-
-      <form action="{% url "directories:publishing-house-view" %}">
-        <button onmouseover = "this.style.backgroundColor='white'"
-          onmouseout = "this.style.backgroundColor='#EBEBEB'"
-          style="padding: 3%; width: 100%; height: 10%; border-radius: 20% 10%; cursor: pointer;">
-          
-          <b style="font-size: 1vw;">
-            Publishing house
-          </b>
-        </button>
-      </form>
-
-    </div>
-    
-    <div style="margin: 4% 0;">
-
-      <form action="{% url "directories:series-view" %}">
-        <button onmouseover = "this.style.backgroundColor='white'"
-          onmouseout = "this.style.backgroundColor='#EBEBEB'"
-          style="padding: 3%; width: 100%; height: 10%; border-radius: 20% 10%; cursor: pointer;">
-          <b style="font-size: 1vw;">
-            Series
-          </b>
-        </button>
-      </form>
-
-    </div>
-   
-    <div style="margin: 4% 0;">
-
-      <form action="{% url "directories:book-view" %}">
-        <button onmouseover = "this.style.backgroundColor='white'"
-          onmouseout = "this.style.backgroundColor='#EBEBEB'"
-          style="padding: 3%; width: 100%; height: 10%; border-radius: 20% 10%; cursor: pointer;">
-          <b style="font-size: 1vw;">
-            Books
-          </b>
-        </button>
-      </form>
-
-    </div>
+  {%endfor%}
   </div>
-</div>
-{% endblock BODY %}
+  {% endblock BODY %}

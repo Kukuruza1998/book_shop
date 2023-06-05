@@ -3,40 +3,76 @@
 {% block TITLE %}Book{% endblock TITLE %}
 
 {% block BODY %}
-  <form action="/">
-    <button>Back</button>
-  </form>
   <form action="{% url 'directories:create-book' %}">
     <button>Add</button>
   </form>
-  {% for object in object_list %}
-    <div>
-      <ul>
-        <p style="font-size: 130%;font-weight: bold;">Book №{{object.pk}}</p>
-        <li>Book name: {{object.book_name}}</li>
-        <li>book image: <img src="{{object.book_image}}" alt=" "></li>
-        <li>book price: {{object.book_price}}</li>
-        <li>autor: {{object.autor}}</li>
-        <li>series: {{object.series}}</li>
-        <li>genre: {{object.genre}}</li>
-        <li>book publishing: {{object.year_publishing}}</li>
-        <li>book page: {{object.page}}</li>
-        <li>binding: {{object.binding}}</li>
-        <li>book format: {{object.format_book}}</li>
-        <li>ISBN: {{object.ISBN}}</li>
-        <li>weight: {{object.weight}}</li>
-        <li>book age restrictions: {{object.age_restrictions}}</li>
-        <li>publishing_house: {{object.publishing_house}}</li>
-        <li>counter_book: {{object.counter_book}}</li>
-        <li>active: {{object.active}}</li>
-        <li>book rating: {{object.rating}}</li>
-        <form action="{% url 'directories:update-book' pk=object.pk %}">
-          <button>Edit</button>
-        </form>
-        <form action="{% url 'directories:delete-book' pk=object.pk %}">
-          <button>Delete</button>
-        </form>
-      </ul>
+
+  <div class="container-book">
+    {% for object in object_list %}
+    <div class="book-block">
+      <div class="card" style="width: 18rem;">
+        <img src="{{object.book_image}}" class="card-img-top" alt="">
+      
+        <div class="card-body">
+          <h5 class="card-title">{{object.book_name}}</h5>
+          <p class="card-text">
+            Book price: {{object.book_price}} BYN
+          </p>
+        </div>
+        <div class="card-body">
+          <img src="{{object.book_image}}" alt=" ">
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+          Book rating: {{object.rating}}
+          </p>
+          <p class="card-text">
+          Autor: {{object.autor}}
+          </p>
+          <p class="card-text">
+          Series: {{object.series}}
+          </p>
+          <p class="card-text">
+          Genre: {{object.genre}}
+          </p>
+          <p class="card-text">
+          Book publishing: {{object.year_publishing}}
+          </p>
+          <p class="card-text">
+          Book page: {{object.page}}
+          </p>
+          <p class="card-text">
+          Binding: {{object.binding}}
+          </p>
+          <p class="card-text">
+          Book format: {{object.format_book}}
+          </p>
+          <p class="card-text">
+          ISBN: {{object.ISBN}}
+          </p>
+          <p class="card-text">
+          Weight: {{object.weight}}
+          </p>
+          <p class="card-text">
+          Book age restrictions: {{object.age_restrictions}}
+          </p>
+          <p class="card-text">
+          Publishing_house: {{object.publishing_house}}
+          </p>
+          <p class="card-text">
+          Counter_book: {{object.counter_book}}
+          </p>
+          <p class="card-text">
+          Active: {{object.active}}
+          </p>
+        </div>
+
+        <a href="{% url 'directories:update-book' pk=object.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'directories:delete-book' pk=object.pk %}" class="btn btn-primary">Delete</a>
+      
+      </div>
     </div>
+  
   {%endfor%}
+  </div>
   {% endblock BODY %}

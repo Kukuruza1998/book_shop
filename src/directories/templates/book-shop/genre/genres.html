@@ -3,9 +3,6 @@
 {% block TITLE %}Genre{% endblock TITLE %}
 
 {% block BODY %}
-  <form action="/">
-    <button>Back</button>
-  </form>
   <form action="{% url 'directories:create-genre' %}">
     <button>Add</button>
   </form>

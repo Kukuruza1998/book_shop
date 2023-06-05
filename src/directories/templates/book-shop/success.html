@@ -4,7 +4,7 @@
 
 {% block BODY %}
 <h2>The operation succeeded!</h2>
-<form action="/">
+<form action="{% url "directories:book-view" %}">
   <button>Back</button>
 </form>
 {% endblock BODY %}

@@ -3,9 +3,6 @@
 {% block TITLE %}Publishing house{% endblock TITLE %}
 
 {% block BODY %}
-  <form action="/">
-    <button>Back</button>
-  </form>
   <form action="{% url 'directories:create-publishing-house' %}">
     <button>Add</button>
   </form>
