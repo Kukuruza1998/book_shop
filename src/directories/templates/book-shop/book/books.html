@@ -4,7 +4,7 @@
 
 {% block BODY %}
   <form action="{% url 'directories:create-book' %}">
-    <button>Add</button>
+    <button class="btn btn-primary">Add</button>
   </form>
 
   <div class="container-book">
@@ -67,8 +67,8 @@
           </p>
         </div>
 
-        <a href="{% url 'directories:update-book' pk=object.pk %}" class="btn btn-primary">Edit</a>
-        <a href="{% url 'directories:delete-book' pk=object.pk %}" class="btn btn-primary">Delete</a>
+        <a href="{% url 'directories:update-book' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Edit</a>
+        <a href="{% url 'directories:delete-book' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Delete</a>
       
       </div>
     </div>

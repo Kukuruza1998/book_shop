@@ -4,7 +4,7 @@
 
 {% block BODY %}
   <form action="{% url 'directories:add-autors' %}">
-    <button>Add</button>
+    <button class="btn btn-primary">Add</button>
   </form>
 
   <div class="container-book">
@@ -15,12 +15,26 @@
         <div class="card-body">
           <h5 class="card-title">{{object.autor_name}}</h5>
           <p class="card-text">
-            Autor description: {{object.autor_description}}
+            <div class="accordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#object{{ forloop.counter}}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Autor description
+                  </button>
+                </h2>
+                
+                <div id="object{{ forloop.counter}}" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    {{object.autor_description}}
+                  </div>
+                </div>
+              </div>
+            </div>
           </p>
         </div>
 
-        <a href="{% url 'directories:update-autors' pk=object.pk %}" class="btn btn-primary">Edit</a>
-        <a href="{% url 'directories:delete-autors' pk=object.pk %}" class="btn btn-primary">Delete</a>
+        <a href="{% url 'directories:update-autors' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Edit</a>
+        <a href="{% url 'directories:delete-autors' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Delete</a>
       
       </div>
     </div>

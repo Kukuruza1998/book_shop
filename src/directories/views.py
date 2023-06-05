@@ -14,7 +14,7 @@ class AutorsView(generic.ListView):
 class DeleteAutorsView(generic.DeleteView):
     model = models.Autor
     template_name = "book-shop/autor/delete_autors.html"
-    success_url = '/success'
+    success_url = "/directories/success"
 
 class AddAutorsView(generic.CreateView):
     model = models.Autor
@@ -54,7 +54,7 @@ class GenreUpdateView(generic.UpdateView):
 class GenreDeleteView(generic.DeleteView):
     model = models.Genre
     template_name = 'book-shop/genre/deletegenre.html'
-    success_url = '/success'
+    success_url = "/directories/success"
 
 
 
@@ -80,7 +80,7 @@ class PublishingHouseUpdateView(generic.UpdateView):
 class PublishingHouseDeleteView(generic.DeleteView):
     model = models.Publishing_House
     template_name = 'book-shop/publishing_house/delete_publishing_house.html'
-    success_url = '/success'
+    success_url = "/directories/success"
 
 
 
@@ -106,7 +106,7 @@ class SeriesUpdateView(generic.UpdateView):
 class SeriesDeleteView(generic.DeleteView):
     model = models.Series
     template_name = 'book-shop/series/delete_series.html'
-    success_url = '/success'
+    success_url = "/directories/success"
 
 
 
@@ -138,7 +138,7 @@ class BookUpdateView(generic.UpdateView):
 class BookDeleteView(generic.DeleteView):
     model = models.Book
     template_name = 'book-shop/book/delete_books.html'
-    success_url = '/success'
+    success_url = "/directories/success"
 
 
 

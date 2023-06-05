@@ -4,23 +4,37 @@
 
 {% block BODY %}
   <form action="{% url 'directories:create-genre' %}">
-    <button>Add</button>
+    <button class="btn btn-primary">Add</button>
   </form>
 
   <div class="container-book">
     {% for object in object_list %}
     <div class="book-block">
       <div class="card" style="width: 18rem;">
-      
+
         <div class="card-body">
           <h5 class="card-title">{{object.genre_name}}</h5>
           <p class="card-text">
-            Genre description: {{object.genre_description}}
+            <div class="accordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed " type="button" data-bs-toggle="collapse" data-bs-target="#object{{ forloop.counter}}" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    Genre description
+                  </button>
+                </h2>
+                
+                <div id="object{{ forloop.counter}}" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    {{object.genre_description}}
+                  </div>
+                </div>
+              </div>
+            </div>
           </p>
         </div>
 
-        <a href="{% url 'directories:update-genre' pk=object.pk %}" class="btn btn-primary">Edit</a>
-        <a href="{% url 'directories:delete-genre' pk=object.pk %}" class="btn btn-primary">Delete</a>
+        <a href="{% url 'directories:update-genre' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Edit</a>
+        <a href="{% url 'directories:delete-genre' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Delete</a>
       
       </div>
     </div>
