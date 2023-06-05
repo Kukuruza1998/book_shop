@@ -21,6 +21,6 @@ from homepage import views as  homepage_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('directories/', include('directories.urls', namespace='directories')),
-    path('books/', homepage_views.HomePage.as_view()),
+    path('', homepage_views.HomePage.as_view()),
 
 ]
