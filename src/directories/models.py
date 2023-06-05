@@ -92,7 +92,7 @@ class Book(models.Model):
     )
     autor = models.ForeignKey(
         Autor,
-        on_delete = models.PROTECT,
+        on_delete = models.CASCADE,
         verbose_name = 'autor'
     )
     series = models.ForeignKey(
@@ -102,7 +102,7 @@ class Book(models.Model):
     )
     genre = models.ForeignKey(
         Genre,
-        on_delete = models.PROTECT,
+        on_delete = models.CASCADE,
         verbose_name = 'genre'
     )
     year_publishing = models.DateField(

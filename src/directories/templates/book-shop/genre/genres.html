@@ -6,19 +6,26 @@
   <form action="{% url 'directories:create-genre' %}">
     <button>Add</button>
   </form>
-  {% for object in object_list %}
-    <div>
-      <ul>
-        <p style="font-size: 130%;font-weight: bold;">Genre №{{ object.pk }}"</p>
-        <li>Genre name: {{object.genre_name}}</li>
-        <li>genre description: {{object.genre_description}}</li>
-        <form action="{% url 'directories:update-genre' pk=object.pk %}">
-          <button>Edit</button>
-        </form>
-        <form action="{% url 'directories:delete-genre' pk=object.pk %}">
-          <button>Delete</button>
-        </form>
-      </ul>
+
+  <div class="container-book">
+    {% for object in object_list %}
+    <div class="book-block">
+      <div class="card" style="width: 18rem;">
+      
+        <div class="card-body">
+          <h5 class="card-title">{{object.genre_name}}</h5>
+          <p class="card-text">
+            Genre description: {{object.genre_description}}
+          </p>
+        </div>
+
+        <a href="{% url 'directories:update-genre' pk=object.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'directories:delete-genre' pk=object.pk %}" class="btn btn-primary">Delete</a>
+      
+      </div>
     </div>
-  {%endfor%}
+  
+    {%endfor%}
+  </div>
+
 {% endblock BODY %}

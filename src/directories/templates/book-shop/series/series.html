@@ -6,19 +6,26 @@
   <form action="{% url 'directories:create-series' %}">
     <button>Add</button>
   </form>
-  {% for object in object_list %}
-    <div>
-      <ul>
-        <p style="font-size: 130%;font-weight: bold;">Series №{{object.pk}}</p>
-        <li>Series name: {{object.series_name}}</li>
-        <li>series description: {{object.series_description}}</li>
-        <form action="{% url 'directories:update-series' pk=object.pk %}">
-          <button>Edit</button>
-        </form>
-        <form action="{% url 'directories:delete-series' pk=object.pk %}">
-          <button>Delete</button>
-        </form>
-      </ul>
+  
+  <div class="container-book">
+    {% for object in object_list %}
+    <div class="book-block">
+      <div class="card" style="width: 18rem;">
+      
+        <div class="card-body">
+          <h5 class="card-title">{{object.series_name}}</h5>
+          <p class="card-text">
+            Count book's series : {{object.series_description}}
+          </p>
+        </div>
+
+        <a href="{% url 'directories:update-series' pk=object.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'directories:delete-series' pk=object.pk %}" class="btn btn-primary">Delete</a>
+      
+      </div>
     </div>
-  {%endfor%}
+  
+    {%endfor%}
+  </div>
+
 {% endblock BODY %}
