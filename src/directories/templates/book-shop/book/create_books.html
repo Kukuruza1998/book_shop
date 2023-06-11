@@ -8,7 +8,7 @@
   </form>
 
   <p style="font-size: 130%;font-weight: bold;">Create a new Book</p>
-  <form action="" method="post">
+  <form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button class="btn btn-primary" type="submit">Create</button>

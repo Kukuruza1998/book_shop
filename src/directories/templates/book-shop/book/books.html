@@ -11,18 +11,13 @@
     {% for object in object_list %}
     <div class="book-block">
       <div class="card" style="width: 100%;">
-        <img src="{{object.book_image}}" class="card-img-top" alt="">
+        <img src="{{ object.book_picture_medium }}" class="card-img-top" alt=" ">
       
         <div class="card-body">
           <h5 class="card-title">{{object.book_name}}</h5>
           <p class="card-text">
             Book price: {{object.book_price}} BYN
           </p>
-        </div>
-        <div class="card-body">
-          <img src="{{object.book_image}}" alt=" ">
-        </div>
-        <div class="card-body">
           <p class="card-text">
           Book rating: {{object.rating}}
           </p>
@@ -69,7 +64,6 @@
 
         <a href="{% url 'directories:update-book' pk=object.pk %}" class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Edit</a>
         <a href="{% url 'directories:delete-book' pk=object.pk %}" class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Delete</a>
-      
       </div>
     </div>
   

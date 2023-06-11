@@ -3,8 +3,10 @@ from random import randint
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views import generic
+from pathlib import Path
 
 from . import models
+from PIL import Image
 
 #Autor
 class AutorsView(generic.ListView):
@@ -135,10 +137,25 @@ class BookUpdateView(generic.UpdateView):
     ]
     template_name = 'book-shop/book/update_books.html'
 
+    def get_success_url(self) -> str:
+        resizer(self.object.book_image)
+        return super().get_success_url()
+
 class BookDeleteView(generic.DeleteView):
     model = models.Book
     template_name = 'book-shop/book/delete_books.html'
     success_url = "/directories/success"
+
+def resizer(image):
+    extention = image.file.name.split('.')[-1]
+    BASE_DIR = Path(image.file.name).resolve().parent
+    file_name = Path(image.file.name).resolve().name.split('.')
+    for m_basewidth in [250, 40]:
+      im = Image.open(image.file.name)
+      wpercent = (m_basewidth / float(im.size[0]))
+      hsize = int(float(im.size[1]) * float(wpercent))
+      im.thumbnail((m_basewidth, hsize), Image.Resampling.LANCZOS)
+      im.save(str(BASE_DIR / "".join(file_name[:-1])) + f'_{m_basewidth}.' + extention)
 
 
 

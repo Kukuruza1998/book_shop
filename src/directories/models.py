@@ -82,8 +82,8 @@ class Book(models.Model):
         max_length = 50
     )
     book_image = models.ImageField(
-        upload_to = 'book',
-        blank = True
+        blank = True,
+        upload_to = "book/%Y/%m/%d/"
     )
     book_price = models.DecimalField(
         max_digits = 6,
@@ -189,3 +189,15 @@ class Book(models.Model):
     
     def get_absolute_url(self):
         return reverse_lazy('directories:success-page')
+    
+    def book_picture_medium(self):
+        orig_url = self.book_image.url
+        new_url = orig_url.split(".")
+        picture_url = ".".join(new_url[:-1]) + "_250." + new_url[-1]
+        return picture_url
+    
+    def book_picture_small(self):
+        orig_url = self.book_image.url
+        new_url = orig_url.split(".")
+        picture_url = ".".join(new_url[:-1]) + "_40." + new_url[-1]
+        return picture_url
