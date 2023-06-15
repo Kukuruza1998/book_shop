@@ -5,7 +5,7 @@
 {% block BODY %}
   {% if user.is_authenticated %}
     <form action="{% url 'directories:create-genre' %}">
-      <button class="btn btn-primary">Add</button>
+      <button class="btn btn-primary">Добавить</button>
     </form>
   {% endif %}
 
@@ -43,9 +43,11 @@
         </div>
 
         {% if user.is_authenticated %}
-        <a href="{% url 'directories:update-genre' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Edit</a>
+        <a href="{% url 'directories:update-genre' pk=object.pk %}" 
+          class="btn btn-primary" style ="margin: .1rem .1rem">Изменить</a>
           {% if user.is_superuser %}
-            <a href="{% url 'directories:delete-genre' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Delete</a>
+            <a href="{% url 'directories:delete-genre' pk=object.pk %}" 
+              class="btn btn-primary" style ="margin: .1rem .1rem">Удалить</a>
           {% endif %}
         {% endif %}
         

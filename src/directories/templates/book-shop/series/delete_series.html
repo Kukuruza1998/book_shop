@@ -3,11 +3,8 @@
 {% block TITLE %}Series{% endblock TITLE %}
 
 {% block BODY %}
-  {% include "./includes/btn_back.html" %}
+  {% include "../book/includes/btn_back.html" %}
 
   <p style="font-size: 130%;font-weight: bold;">Delete "{{ object.series_name }}"?</p>
-  <form action="" method="post">
-    {% csrf_token %}
-    <button class="btn btn-primary" type="submit">Delete</button>
-  </form>
+  {% include "../book/includes/form_delete.html" %}
 {% endblock BODY %}
