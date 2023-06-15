@@ -83,6 +83,7 @@ class Book(models.Model):
     )
     book_image = models.ImageField(
         blank = True,
+        default = "/book/book-default.jpg",
         upload_to = "book/%Y/%m/%d/"
     )
     book_price = models.DecimalField(

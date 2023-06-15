@@ -41,15 +41,23 @@
           <li class="nav-item">
             <a class="nav-link" style="margin-left: 1rem;" href="{% url "directories:series-view" %}">Series</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" style="margin-left: 1rem;" href="{% url "directories:book-view" %}">Books</a>
-          </li>
         </ul>
         
-        <form class="d-flex" role="search">
+        <form class="d-flex" role="search" style="padding-right: 30%">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
+
+        {% if user.is_authenticated %}
+          <form action="{% url 'staff:logout' %}" class="d-flex">
+            <button class="btn btn-outline-danger" >Logout, {{ user }}</button>
+          </form>
+        {% else %}
+          <form action="{% url 'staff:login' %}" class="d-flex">
+            <button class="btn btn-outline-success" >Login</button>
+          </form>
+        {% endif %}
+
       </div>
     </div>
   </nav>

@@ -1,0 +1,79 @@
+<div>
+  {% if user.is_authenticated %}
+      <form action="{% url 'directories:create-book' %}">
+        <button class="btn btn-primary">Add</button>
+      </form>
+  {% endif %}
+
+  <div class="container-book">
+    {% for object in object_list %}
+    <div class="book-block">
+      <div class="card" style="width: 100%;">
+
+        <img src="{{ object.book_picture_medium }}" width="250" height ="300" 
+          style="object-fit: fill" class="card-img-top" alt=" "
+        >
+      
+        <div class="card-body">
+          <h5 class="card-title">{{object.book_name}}</h5>
+          <p class="card-text">
+            Book price: {{object.book_price}} BYN
+          </p>
+          <p class="card-text">
+          Book rating: {{object.rating}}
+          </p>
+          <p class="card-text">
+          Autor: {{object.autor}}
+          </p>
+          <p class="card-text">
+          Series: {{object.series}}
+          </p>
+          <p class="card-text">
+          Genre: {{object.genre}}
+          </p>
+          <p class="card-text">
+          Book publishing: {{object.year_publishing}}
+          </p>
+          <p class="card-text">
+          Book page: {{object.page}}
+          </p>
+          <p class="card-text">
+          Binding: {{object.binding}}
+          </p>
+          <p class="card-text">
+          Book format: {{object.format_book}}
+          </p>
+          <p class="card-text">
+          ISBN: {{object.ISBN}}
+          </p>
+          <p class="card-text">
+          Weight: {{object.weight}}
+          </p>
+          <p class="card-text">
+          Book age restrictions: {{object.age_restrictions}}
+          </p>
+          <p class="card-text">
+          Publishing_house: {{object.publishing_house}}
+          </p>
+          <p class="card-text">
+          Counter_book: {{object.counter_book}}
+          </p>
+          <p class="card-text">
+          Active: {{object.active}}
+          </p>
+        </div>
+        {% if user.is_authenticated %}
+        <a href="{% url 'directories:update-book' pk=object.pk %}" class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Edit</a>
+          {% if user.is_superuser %}
+            <a href="{% url 'directories:delete-book' pk=object.pk %}" class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Delete</a>
+          {% endif %}
+        {% endif %}
+        
+        <a href="{% url 'directories:view-book' pk=object.pk %}" class="btn btn-primary" style ="margin: 0.1rem 0.1rem">View</a>
+      
+      </div>
+    </div>
+
+  {%endfor%}
+  </div>
+</div>

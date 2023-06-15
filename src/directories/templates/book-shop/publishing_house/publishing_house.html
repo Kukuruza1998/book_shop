@@ -3,9 +3,11 @@
 {% block TITLE %}Publishing house{% endblock TITLE %}
 
 {% block BODY %}
-  <form action="{% url 'directories:create-publishing-house' %}">
-    <button class="btn btn-primary">Add</button>
-  </form>
+  {% if user.is_authenticated %}
+    <form action="{% url 'directories:create-publishing-house' %}">
+      <button class="btn btn-primary">Add</button>
+    </form>
+  {% endif %}
 
   <div class="container-book">
     {% for object in object_list %}
@@ -40,9 +42,13 @@
           </p>
         </div>
 
+        {% if user.is_authenticated %}
         <a href="{% url 'directories:update-publishing-house' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Edit</a>
-        <a href="{% url 'directories:delete-publishing-house' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Delete</a>
-      
+          {% if user.is_superuser %}
+            <a href="{% url 'directories:delete-publishing-house' pk=object.pk %}" class="btn btn-primary" style ="margin: .1rem .1rem">Delete</a>
+          {% endif %}
+        {% endif %}
+        
       </div>
     </div>
   

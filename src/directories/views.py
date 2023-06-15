@@ -3,6 +3,8 @@ from random import randint
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views import generic
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 from pathlib import Path
 
 from . import models
@@ -13,19 +15,22 @@ class AutorsView(generic.ListView):
     model = models.Autor
     template_name = "book-shop/autor/autors.html"
 
-class DeleteAutorsView(generic.DeleteView):
+class DeleteAutorsView(LoginRequiredMixin, generic.DeleteView):
+    login_url = reverse_lazy("staff:login")
     model = models.Autor
     template_name = "book-shop/autor/delete_autors.html"
     success_url = "/directories/success"
 
-class AddAutorsView(generic.CreateView):
+class AddAutorsView(LoginRequiredMixin, generic.CreateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Autor
     fields = [
         'autor_name', 'autor_description'
     ]
     template_name = "book-shop/autor/add_autors.html" 
         
-class UpdateAutorsView(generic.UpdateView):
+class UpdateAutorsView(LoginRequiredMixin, generic.UpdateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Autor
     fields = [
         'autor_name', 'autor_description'
@@ -39,21 +44,24 @@ class GenreListView(generic.ListView):
     model = models.Genre
     template_name = 'book-shop/genre/genres.html'
 
-class GenreCreateView(generic.CreateView):
+class GenreCreateView(LoginRequiredMixin, generic.CreateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Genre
     fields = [
         'genre_name', 'genre_description'
     ]
     template_name = 'book-shop/genre/creategenre.html'
 
-class GenreUpdateView(generic.UpdateView):
+class GenreUpdateView(LoginRequiredMixin, generic.UpdateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Genre
     fields = [
         'genre_name', 'genre_description'
     ]
     template_name = 'book-shop/genre/updategenre.html'
 
-class GenreDeleteView(generic.DeleteView):
+class GenreDeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = reverse_lazy("staff:login")
     model = models.Genre
     template_name = 'book-shop/genre/deletegenre.html'
     success_url = "/directories/success"
@@ -65,21 +73,24 @@ class PublishingHouseView(generic.ListView):
     model = models.Publishing_House
     template_name = 'book-shop/publishing_house/publishing_house.html'
 
-class PublishingHouseCreateView(generic.CreateView):
+class PublishingHouseCreateView(LoginRequiredMixin, generic.CreateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Publishing_House
     fields = [
         'publishing_house_name', 'publishing_house_description'
     ]
     template_name = 'book-shop/publishing_house/create_publishing_house.html'
 
-class PublishingHouseUpdateView(generic.UpdateView):
+class PublishingHouseUpdateView(LoginRequiredMixin, generic.UpdateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Publishing_House
     fields = [
         'publishing_house_name', 'publishing_house_description'
     ]
     template_name = 'book-shop/publishing_house/update_publishing_house.html'
 
-class PublishingHouseDeleteView(generic.DeleteView):
+class PublishingHouseDeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = reverse_lazy("staff:login")
     model = models.Publishing_House
     template_name = 'book-shop/publishing_house/delete_publishing_house.html'
     success_url = "/directories/success"
@@ -91,21 +102,24 @@ class SeriesView(generic.ListView):
     model = models.Series
     template_name = 'book-shop/series/series.html'
 
-class SeriesCreateView(generic.CreateView):
+class SeriesCreateView(LoginRequiredMixin, generic.CreateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Series
     fields = [
         'series_name', 'series_description'
     ]
     template_name = 'book-shop/series/create_series.html'
 
-class SeriesUpdateView(generic.UpdateView):
+class SeriesUpdateView(LoginRequiredMixin, generic.UpdateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Series
     fields = [
         'series_name', 'series_description'
     ]
     template_name = 'book-shop/series/update_series.html'
 
-class SeriesDeleteView(generic.DeleteView):
+class SeriesDeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = reverse_lazy("staff:login")
     model = models.Series
     template_name = 'book-shop/series/delete_series.html'
     success_url = "/directories/success"
@@ -117,7 +131,18 @@ class BookView(generic.ListView):
     model = models.Book
     template_name = 'book-shop/book/books.html'
 
-class BookCreateView(generic.CreateView):
+class ViewBook(generic.DetailView):
+    model = models.Book
+    fields = [
+        'book_name', 'book_image', 'book_price', 'autor', 'series',
+          'genre', 'year_publishing', 'page', 'binding', 'format_book',
+            'ISBN', 'weight', 'age_restrictions', 'publishing_house', 
+              'counter_book', 'active', 'rating'
+    ]
+    template_name = 'book-shop/book/view_book.html'
+    
+class BookCreateView(LoginRequiredMixin, generic.CreateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Book
     fields = [
         'book_name', 'book_image', 'book_price', 'autor', 'series',
@@ -127,7 +152,8 @@ class BookCreateView(generic.CreateView):
     ]
     template_name = 'book-shop/book/create_books.html'
 
-class BookUpdateView(generic.UpdateView):
+class BookUpdateView(LoginRequiredMixin, generic.UpdateView):
+    login_url = reverse_lazy("staff:login")
     model = models.Book
     fields = [
         'book_name', 'book_image', 'book_price', 'autor', 'series',
@@ -141,7 +167,8 @@ class BookUpdateView(generic.UpdateView):
         resizer(self.object.book_image)
         return super().get_success_url()
 
-class BookDeleteView(generic.DeleteView):
+class BookDeleteView(LoginRequiredMixin, generic.DeleteView):
+    login_url = reverse_lazy("staff:login")
     model = models.Book
     template_name = 'book-shop/book/delete_books.html'
     success_url = "/directories/success"
