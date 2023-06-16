@@ -14,36 +14,28 @@
           style="object-fit: fill" class="card-img-top" alt=" "
         >
       
-        <div class="card-body">
-          <h5 class="card-title">{{object.book_name}}</h5>
+        <div class="card-body" style="width: 250px;">
+          <div style="height: 80px;">
+            <h5 class="card-title" style="word-break: normal;">{{object.book_name}}</h5>
+          </div>
+          
 
-          <p class="card-text">
+          <p class="card-text" style="word-break: normal;">
             Рейтинг: {{object.rating}}
           </p>
-          <p class="card-text">
+          <p class="card-text" style="word-break: normal;height: 40px;">
             Автор: {{object.autor}}
           </p>
-          <p class="card-text">
+          <p class="card-text" style="word-break: normal;">
             Жанр: {{object.genre}}
           </p>
-          <p class="card-text">
+          <p class="card-text" style="word-break: normal;height: 40px;">
             Год публикации: {{object.year_publishing}}
           </p>
-          <p class="card-text">
+          <p class="card-text" style="word-break: normal;">
             Цена: {{object.book_price}} BYN
           </p>
         </div>
-
-        {% if user.is_authenticated %}
-        <a href="{% url 'directories:update-book' pk=object.pk %}" 
-          class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Изменить</a>
-
-          {% if user.is_superuser %}
-            <a href="{% url 'directories:delete-book' pk=object.pk %}" 
-              class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Удалить</a>
-
-          {% endif %}
-        {% endif %}
         
         <a href="{% url 'directories:view-book' pk=object.pk %}" 
           class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Подробнее</a>
