@@ -104,6 +104,8 @@ p {
       {% if user.is_authenticated %}
         <a href="{% url 'directories:update-book' pk=object.pk %}" 
           class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Изменить</a>
+        <a href="{% url 'staff:add_to_cart' pk=object.pk %}"
+          class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Добавить в корзину</a>
 
       {% if user.is_superuser %}
 
