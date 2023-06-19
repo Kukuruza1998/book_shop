@@ -1,4 +1,4 @@
-from staff.models import Cart
+from cart.models import Cart
 
 
 class ShoppingCartMiddleware:
@@ -11,6 +11,7 @@ class ShoppingCartMiddleware:
 
         if user and user.is_authenticated:
             cart = Cart.objects.get(user=user)
+            request.cart_id = cart.id
             number_of_items_in_cart = cart.books.count()
         request.number_of_items_in_cart = number_of_items_in_cart
         return self.get_response(request)

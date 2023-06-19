@@ -25,9 +25,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-<div style="color: #0dcaf0">
-    {{ request.number_of_items_in_cart }}
-</div>
+      
       <div class="collapse navbar-collapse" id="navbarCollapse">
 
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
@@ -51,6 +49,18 @@
         </form>
 
         {% if user.is_authenticated %}
+
+        {% comment %} CART {% endcomment %}
+        <form action="{% url 'cart:view_cart' cart_id=request.cart_id %}" class="d-flex">
+          <button class="btn btn-outline-light" style="margin-right: 20px;">
+
+              {{ request.number_of_items_in_cart }}
+              <ion-icon name="cart-outline" s></ion-icon>
+
+          </button>
+        </form>
+        {% comment %} CART {% endcomment %}
+
           <form action="{% url 'staff:logout' %}" class="d-flex">
             <button class="btn btn-outline-danger" >Logout, {{ user }}</button>
           </form>
@@ -130,5 +140,7 @@
 
 </main>
 <script src="{% static "/js/bootstrap.bundle.min.js" %}"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     </body>
 </html>

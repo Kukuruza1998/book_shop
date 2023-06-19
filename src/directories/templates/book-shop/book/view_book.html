@@ -104,16 +104,21 @@ p {
       {% if user.is_authenticated %}
         <a href="{% url 'directories:update-book' pk=object.pk %}" 
           class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Изменить</a>
-        <a href="{% url 'staff:add_to_cart' pk=object.pk %}"
-          class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Добавить в корзину</a>
 
-      {% if user.is_superuser %}
+        {% if object.active == "Y" %}
+          <a href="{% url 'cart:add_to_cart' pk=object.pk %}"
+            class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Добавить в корзину</a>
+        {% else %} 
+          <a href="#"
+            class="btn btn-danger" style ="margin: 0.1rem 0.1rem">Нет на складе</a>
+        {% endif %}
 
-        <a href="{% url 'directories:delete-book' pk=object.pk %}" 
-          class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Удалить</a>
+        {% if user.is_superuser %}
+          <a href="{% url 'directories:delete-book' pk=object.pk %}" 
+            class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Удалить</a>
+        {% endif %}
 
       {% endif %}
-    {% endif %}
     </div>
   </div>
 
