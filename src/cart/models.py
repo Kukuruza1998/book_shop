@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.db.models import Sum
 
 from directories.models import Book
 
@@ -31,3 +32,12 @@ class Cart(models.Model):
             price = book_in_cart.book.book_price
             total_price += price * count
         return total_price
+    
+    def get_grouped_price(self):
+      grouped_price = []
+      for book_in_cart in self.books.all().select_related('book').values('book__id', 'book__book_name', 'book__book_price').annotate(count=Sum('count')):
+          count = book_in_cart['count']
+          price = book_in_cart['book__book_price']
+          book_name = book_in_cart['book__book_name']
+          grouped_price.append({'book_name': book_name, 'count': count, 'price': price, 'total_price': count * price})
+      return grouped_price

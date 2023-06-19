@@ -4,31 +4,111 @@
 
 {% block BODY %}
   
-    <form method="post">
-        {% csrf_token %}
-        {% for book in object.books.all %}
-          <p>nazvanie knigi: {{ book.book}}</p>
-          
-          <p>1 книга: {{ book.book.book_price }}</p>
-          
-          
-          <form action="{% url 'cart:update_item' cart_id=cart.id item_id=book.id %}" method="post">
-            {% csrf_token %}
-            <input type="number" name="count" min="1" value="{{ book.count }}">
-            <input type="hidden" name="item_id" value="{{ book.id }}">
-            <button type="submit">Update</button>
-          </form>
 
-          <form action="{% url 'cart:remove_item' cart_id=cart.id item_id=book.id %}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="item_id" value="{{ book.id }}">
-            <button type="submit">Remove</button>
-          </form>
-          
-          <p>-------------------------------</p>
-          
-        {% endfor %}
-        <p>Общая стоимость: {{ object.get_total_price }} BYN</p>
+<div class="container h-100">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col">
+      <p><span class="h2">Корзина </span><span class="h4">
+        ({{ request.number_of_items_in_cart }} товара в корзине)
+      </span></p>
+
+<form method="post">
+        {% csrf_token %}
+        
+        {% for book in object.books.all %}
+      <div class="card mb-4">
+        <div class="card-body p-4">
+
+          <div class="row align-items-center">
+            <div class="col-md-2">
+              <img src="{{ book.book.book_picture_medium }}"
+                class="img-fluid" alt="Generic placeholder image">
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+              <div>
+                <p class="small text-muted mb-4 pb-2">Название книги</p>
+                <p class="lead fw-normal mb-0">{{ book.book }}</p>
+              </div>
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+              <div>
+                <p class="small text-muted mb-4 pb-2">Жанр книги</p>
+                <p class="lead fw-normal mb-0"><i class="fas fa-circle me-2" style="color: #fdd8d2;"></i>
+                  {{ book.book.genre }}</p>
+              </div>
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+              <div>
+                <p class="small text-muted mb-4 pb-2">Quantity</p>
+                <p class="lead fw-normal mb-0">
+                  <form action="{% url 'cart:update_item' cart_id=cart.id item_id=book.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="number" required name="count" min="1" value="{{ book.count }}">
+                    <input type="hidden" name="item_id" value="{{ book.id }}">
+                    <button type="submit">Применить</button>
+                  </form>
+                </p>
+              </div>
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+              <div>
+                <p class="small text-muted mb-4 pb-2">Итого</p>
+                {% for group in cart.get_grouped_price %}
+                  {% if group.price == book.book.book_price %}
+                    <p class="lead fw-normal mb-0">{{ group.total_price }} BYN</p>
+                  {% endif %}  
+                {% endfor %}
+              </div>
+            </div>
+            
+            <div class="col-md-2 d-flex justify-content-center">
+              <div>
+                <form action="{% url 'cart:remove_item' cart_id=cart.id item_id=book.id %}" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="item_id" value="{{ book.id }}">
+                <button class="btn btn-danger" type="submit">Удалить</button>
+                </form>
+              </div>
+            </div>
+            <div class="col-md-2 d-flex justify-content-center">
+              <div>
+                <p class="small text-muted mb-4 pb-2">Цена книги</p>
+                <p class="lead fw-normal mb-0">{{ book.book.book_price }} BYN</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    
+  {% endfor %}
+      <div class="card mb-5">
+        <div class="card-body p-4">
+
+          <div class="float-end">
+            <p class="mb-0 me-5 d-flex align-items-center">
+              <span class="small text-muted me-2">Общая стоимость: </span> <span
+                class="lead fw-normal">{{ object.get_total_price }} BYN</span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      {% if object.get_total_price != 0 %}
+        <div class="d-flex justify-content-end">
+          <form action="{% url 'directories:book-view' %}">
+            <button class="btn btn-light btn-lg me-2">Продолжить покупки</button>
+          </form>  
+          <button type="button" class="btn btn-primary btn-lg">Опалитить</button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+    
+         
     </form>
     
 {% endblock BODY %}
