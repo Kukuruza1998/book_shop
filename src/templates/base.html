@@ -21,7 +21,7 @@
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">BooShop</a>
+      <a class="navbar-brand" href="/" style="color: seagreen;">BooShop</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -43,8 +43,8 @@
           </li>
         </ul>
         
-        <form class="d-flex" role="search" style="padding-right: 30%">
-          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+        <form class="d-flex" role="search" style="padding-right: 30%" action="{% url 'search:search' %}">
+          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
           <button class="btn btn-outline-secondary" type="submit">Search</button>
         </form>
 
@@ -109,7 +109,7 @@
             type="button"
             aria-expanded="false"
             data-bs-toggle="dropdown"
-            aria-label="Toggle theme (auto)">
+            aria-label="Toggle theme (auto)" style="background: seagreen; border-color: seagreen;">
       <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
       <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
     </button>

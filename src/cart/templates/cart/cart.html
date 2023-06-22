@@ -8,9 +8,14 @@
 <div class="container h-100">
   <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col">
-      <p><span class="h2">Корзина </span><span class="h4">
-        ({{ request.number_of_items_in_cart }} товара в корзине)
-      </span></p>
+      <p style="color:seagreen;">
+        <span class="h2">
+          Корзина 
+        </span>
+        <span class="h4">
+          ({{ request.number_of_items_in_cart }} шт. товара в корзине)
+        </span>
+      </p>
 
 <form method="post">
         {% csrf_token %}
@@ -100,7 +105,9 @@
           <form action="{% url 'directories:book-view' %}">
             <button class="btn btn-light btn-lg me-2">Продолжить покупки</button>
           </form>  
-          <button type="button" class="btn btn-primary btn-lg">Опалитить</button>
+          <button type="button" class="btn btn-primary btn-lg" style="background:seagreen; border-color:seagreen;">
+            Опалитить
+          </button>
         </div>
       {% endif %}
     </div>

@@ -89,7 +89,7 @@ class Book(models.Model):
     book_price = models.DecimalField(
         max_digits = 6,
         decimal_places = 2,
-        default = 0
+        default = 0.01
     )
     autor = models.ForeignKey(
         Autor,
@@ -128,12 +128,12 @@ class Book(models.Model):
     )
         
     FORMAT = (
-        ('Super small', '84x108/64'),
-        ('Small', '75x90/32'),
-        ('Standart', '60x90/16'),
-        ('Bigger', '70x108/16'),
-        ('Big', '60x90/8'),
-        ('Super big', '84x108/8'),
+        ('84x108/64', '84x108/64'),
+        ('75x90/32', '75x90/32'),
+        ('60x90/16', '60x90/16'),
+        ('70x108/16', '70x108/16'),
+        ('60x90/8', '60x90/8'),
+        ('84x108/8', '84x108/8'),
     )
 
     format_book = models.CharField(

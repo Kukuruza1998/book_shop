@@ -3,9 +3,6 @@
 {% block HEAD %}
 <style>
 .card-prod {
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
   margin: auto;
   max-width: 1000px;
   padding: 20px;
@@ -13,9 +10,12 @@
 }
 
 .div-img {
+  text-align: center;
   float: left;
-  margin-right: 20px;
+  margin: 0 20px 5px 90px;
   width: 350px;
+  border-radius: 10px;
+  box-shadow: -5px 50px 12px rgba(0,0,0,0.2);
 }
 
 img {
@@ -25,22 +25,40 @@ img {
 }
 
 .div-text {
-  margin-left: 370px;
+  margin-left: 550px;
   text-align: left;
   word-break: break-all;
 }
 
 h5 {
-  font-size: 2.4em;
+  font-size: 3em;
   margin-bottom: 10px;
   margin-top: 0;
 }
 
 p {
-  font-size: 16px;
+  font-size: 14px;
   margin: 0;
-  padding: 5px 0;
+  padding: 2.5px 0;
+  color: grey;
+  word-break: normal;
 }
+.p_rating{
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 20px ;
+  color: rgb(47, 79, 60);
+}
+#btn-add-to-cart-active{
+  margin: 0.1rem 0.1rem; 
+  background-color: seagreen; 
+  border-color: seagreen;
+}
+#btn-add-to-cart-active:hover{
+  margin: 0.1rem 0.1rem; 
+  background-color: rgb(38, 175, 95); 
+  border-color: rgb(38, 175, 95);
+}
+
 
 </style>
 {% endblock HEAD %}
@@ -53,19 +71,54 @@ p {
     <div class="div-img">
       <img src="{{ object.book_image.url }}" alt=" ">
     </div>
+
     <div class="div-text">
-        <h5>{{object.book_name}}</h5>
-        <h5 style="border-bottom: 1px solid #d9d9d9;">
-          {{object.book_price}} BYN
+        <h5 style="font-size: 2em; font-weight: 400; word-break: normal;">{{object.book_name}}
           <p>
-            Рейтинг: {{object.rating}}
+          Автор: {{object.autor}}
+          </p>
+          <p class="p_rating">
+            Рейтинг: {{object.rating}}<span style="color:gold;">★</span>
           </p>
         </h5>
         
-        <p>
-        Автор: {{object.autor}}
-        </p>
-        <p>
+        
+        {% if object.active == "Y" %}
+          <h5 style="color: darkgreen;">
+            {{object.book_price}} BYN
+          </h5>
+          {% if user.is_authenticated %}
+            {% comment %} если залогинен {% endcomment %}
+            {% if already_in_cart %}
+              {% comment %} если в корзине {% endcomment %}
+
+              <a href="#" class="btn btn-primary" id="btn-add-to-cart-active">Добавлено</a>
+              
+            {% else %}
+              {% comment %} если не в корзине {% endcomment %}
+
+              <a href="{% url 'cart:add_to_cart' pk=object.pk %}"
+                class="btn btn-primary" id="btn-add-to-cart-active">Добавить в корзину</a>
+
+            {% endif %}
+
+          {% else %}
+            {% comment %} если не залогинен {% endcomment %}
+
+            <a href="{% url 'staff:login' %}"
+              class="btn btn-primary" id="btn-add-to-cart-active">Добавить в корзину</a>
+
+          {% endif %}
+          
+        {% else %} 
+          <h5 style="color: darkgrey;">
+            {{object.book_price}} BYN
+          </h5>
+          <a href="#"
+            class="btn btn-danger" style ="margin: 0.1rem 0.1rem">Нет на складе</a>
+        {% endif %}
+        
+        <p style="padding-top: 20px;">
         Серия: {{object.series}}
         </p>
         <p>
@@ -96,22 +149,19 @@ p {
         Издательство: {{object.publishing_house}}
         </p>
         <p>
-        Количество книг: {{object.counter_book}}
+        В наличии книг: {{object.counter_book}}
         </p>
-        <p>
-        Доступна: {{object.active}}
+
+
+        {% if user.is_superuser %}
+        <p style="color: #0d6efd; font-weight: 600;">
+          Доступна: {{object.active}}
         </p>
-      {% if user.is_authenticated %}
+        {% endif %}
+        
+      {% if user.is_superuser %}
         <a href="{% url 'directories:update-book' pk=object.pk %}" 
           class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Изменить</a>
-
-        {% if object.active == "Y" %}
-          <a href="{% url 'cart:add_to_cart' pk=object.pk %}"
-            class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Добавить в корзину</a>
-        {% else %} 
-          <a href="#"
-            class="btn btn-danger" style ="margin: 0.1rem 0.1rem">Нет на складе</a>
-        {% endif %}
 
         {% if user.is_superuser %}
           <a href="{% url 'directories:delete-book' pk=object.pk %}" 
@@ -119,6 +169,13 @@ p {
         {% endif %}
 
       {% endif %}
+    </div>
+    <div style="bottom: 0; text-align: left; margin-top: 80px;">
+      <div>
+        <button type="button" value="abc" style="width: 33%;">Описание</button>
+        <button type="button" value="abc" style="width: 33%;">Отзывы</button>
+        <button type="button" value="abc" style="width: 33%;">Доставка</button>
+      </div>
     </div>
   </div>
 

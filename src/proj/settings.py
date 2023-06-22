@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'directories',
     'staff',
     'homepage',
-    'cart'
+    'cart',
+    'search'
     
 ]
 

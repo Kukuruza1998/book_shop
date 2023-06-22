@@ -1,7 +1,9 @@
+{% extends 'base.html' %}
+
 {% block HEAD %}
-  <style>
-    /* Стили для текста в карточке */
-    #p-in-card-homepage-rating {
+<style>
+  /* Стили для текста в карточке */
+  #p-in-card-homepage-rating {
       word-break: normal;
       font-size: 12px;
       font-weight: 400;
@@ -43,36 +45,39 @@
       overflow: hidden;
       margin-bottom: 0;
     }
-  </style>
+    #p-query{
+      margin-top: 0;
+      color: seagreen;
+    }
+</style>
 {% endblock HEAD %}
 
-<div>
-  {% if user.is_superuser %}
-    <!-- Форма для добавления новой книги -->
-    <form action="{% url 'directories:create-book' %}">
-      <button class="btn btn-primary">Добавить</button>
-    </form>
-  {% endif %}
-
+{% block BODY %}
+{% block content %}
+  
+  
+  {% if books %}
+  <h2 style="color:darkgreen; margin-bottom: 0;">Результаты поиска: </h2>
+  <p id="p-query">(поиск по запросу "{{query}}")</p>
   <div class="container-book">
-    {% for object in object_list %}
-      <a href="{% url 'directories:view-book' pk=object.pk %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
+    {% for book in books %}
+      <a href="{% url 'directories:view-book' pk=book.pk %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
         <div class="book-block">
           <div class="card" style="width: 100%;">
             <!-- Изображение книги -->
-            <img src="{{ object.book_picture_medium }}" width="250" height ="300" style="max-width: 250px; object-fit: fill" class="card-img-top" alt=" ">
+            <img src="{{ book.book_picture_medium }}" width="250" height ="300" style="max-width: 250px; object-fit: fill" class="card-img-top" alt=" ">
             <div class="card-body" style="width: 250px;">
               <!-- Название книги, автор, рейтинг -->
               <div>
                 <h5 class="card-title">
                   <p id="title_book">
-                    {{object.book_name}}
+                    {{book.book_name}}
                   </p>
                   <p class="card-text" id="p-in-card-homepage-rating">
-                    {{object.autor}}  
+                    {{book.autor}}  
                   </p>
                   <p class="autor-in-card">
-                    Рейтинг: {{object.rating}}
+                    Рейтинг: {{book.rating}}
                     <span style="color:gold;">★</span>
                   </p>
                   
@@ -80,12 +85,17 @@
               </div>
               <!--  Цена -->
               <p class="card-text" id="price-in-card-homepage">
-                {{object.book_price}} BYN
+                {{book.book_price}} BYN
               </p>
             </div>
           </div>
         </div>
       </a>
     {% endfor %}
-  </div>
-</div>
+  </div>  
+  {% else %}
+  <h2 style="color: rgb(185, 4, 4);">Результаты поиска</h2>
+    <p style="color: rgb(185, 4, 4);">По вашему запросу ничего не найдено.</p>
+  {% endif %}
+{% endblock %}
+{% endblock BODY %}
