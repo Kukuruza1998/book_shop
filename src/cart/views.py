@@ -8,9 +8,10 @@ from django.contrib.auth import views as auth_views
 from django.views.generic import View
 from django.http import HttpResponseRedirect
 
-from cart.models import Cart, BookInCart
+from cart.models import Cart, BookInOrder
 
 from directories.models import Book
+from .models import Order
 from . import models
 
 
@@ -26,7 +27,7 @@ class AddToCartView(View):
             return redirect(to=reverse("directories:view-book", kwargs={
                 "pk": book_pk
             }))
-        book_in_cart = BookInCart.objects.create(
+        book_in_cart = BookInOrder.objects.create(
             book=book,
             count=1,
         )
@@ -45,18 +46,28 @@ class CartView(generic.DetailView):
         if user.is_authenticated:
             return Cart.objects.get(user=user, id=self.kwargs.get('cart_id'))
         return None
-    
+
     def post(self, request, *args, **kwargs):
-      cart = self.get_object()
-      item_id = request.POST.get('item_id')
-      quantity = request.POST.get('count')
-      item = cart.books.get(id=item_id)
-      item.count = quantity
-      item.save()
-      return redirect('cart:view_cart', cart_id=cart.id)
+        cart = self.get_object()
+
+        if "checkout" in request.POST:
+            order = Order.objects.create(user=cart.user, total_price=cart.get_total_price())
+            for book_in_cart in cart.books.all():
+                order.books.add(book_in_cart)
+            cart.clear_cart()
+
+            return redirect('cart:view_cart', cart_id=cart.id)
+        else:
+            item_id = request.POST.get("item_id")
+            count = request.POST.get("count")
+            cart.update_count(item_id, count)
+            return redirect('cart:view_cart', cart_id=cart.id)
 
     def remove_item(request, cart_id, item_id):
-      cart = Cart.objects.get(id=cart_id)
-      item = cart.books.get(id=item_id)
-      item.delete()
-      return redirect('cart:view_cart', cart_id=cart.id)
+        cart = Cart.objects.get(id=cart_id)
+        item = cart.books.get(id=item_id)
+        item.delete()
+        return redirect('cart:view_cart', cart_id=cart.id)
+
+    def clear_cart(self):
+        self.books.clear()

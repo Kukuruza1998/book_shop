@@ -1,9 +1,10 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Cart, BookInCart
+from .models import Cart, BookInOrder, Order
 
-admin.site.register(BookInCart)
+admin.site.register(BookInOrder)
+admin.site.register(Order)
 
 
 @admin.register(Cart)
