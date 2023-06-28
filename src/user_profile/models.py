@@ -48,7 +48,9 @@ class Account(models.Model):
     )
     address = models.ForeignKey(
         Address, 
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE, 
+        blank=True, 
+        null=True
         )
 
     def __str__(self):
