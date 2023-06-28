@@ -5,24 +5,29 @@ from django.contrib.auth.models import User
 class Address(models.Model):
     country = models.CharField(
         max_length=15,
-        blank=True
+        blank=True,
+        null=True
     )
     city = models.CharField(
         max_length=15,
-        blank=True
+        blank=True,
+        null=True
     )
     zip_code = models.DecimalField(
         max_digits=15,
         decimal_places=0,
-        blank=True
+        blank=True,
+        null=True
     )
     address1 = models.CharField(
         max_length=20,
-        blank=True
+        blank=True,
+        null=True
     )
     address2 = models.CharField(
         max_length=20,
-        blank=True
+        blank=True,
+        null=True
     )
 
     def __str__(self):
@@ -45,9 +50,8 @@ class Account(models.Model):
         default=False
     )
     gender = models.CharField(
-        max_length=10,
-        choices=[('Мужской','male'),('Женский','female'), ('Не выбрано','sex')],
-        default="sex"
+        max_length=7,
+        choices=[('Мужской','male'),('Женский','female')]
     )
     address = models.ForeignKey(
         Address, 

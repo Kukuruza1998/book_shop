@@ -9,6 +9,8 @@ from .models import Account, Address
 from django.contrib.auth.forms import UserChangeForm
 from django import forms
 from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 
@@ -94,3 +96,18 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
         if obj.user != self.request.user:
             raise Http404
         return obj
+    
+
+    @receiver(post_save, sender=User)
+    def create_account(sender, instance, created, **kwargs):
+      if created:
+          address = Address.objects.create()
+          Account.objects.create(user=instance, address=address)
+
+    @receiver(post_save, sender=User)
+    def save_account(sender, instance, **kwargs):
+        try:
+            instance.account.save()
+        except Account.DoesNotExist:
+            address = Address.objects.create()
+            Account.objects.create(user=instance, address=address)
