@@ -41,7 +41,9 @@ class Account(models.Model):
         max_length=15,
         blank=True
     )
-    view_personal_info = models.BooleanField()
+    view_personal_info = models.BooleanField(
+        default=False
+    )
     gender = models.CharField(
         max_length=7,
         choices=[('Мужской','male'),('Женский','female')]
