@@ -45,9 +45,9 @@ class Account(models.Model):
         default=False
     )
     gender = models.CharField(
-        max_length=7,
-        choices=[('Мужской','male'),('Женский','female')],
-        default="male"
+        max_length=10,
+        choices=[('Мужской','male'),('Женский','female'), ('Не выбрано','sex')],
+        default="sex"
     )
     address = models.ForeignKey(
         Address, 
