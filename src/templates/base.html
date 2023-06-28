@@ -45,7 +45,7 @@
         
         <form class="d-flex" role="search" style="padding-right: 30%" action="{% url 'search:search' %}">
           <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
-          <button class="btn btn-outline-secondary" type="submit">Search</button>
+          <button class="btn btn-outline-light" type="submit">Search</button>
         </form>
 
         {% if user.is_authenticated %}
@@ -55,16 +55,20 @@
           <button class="btn btn-outline-light" style="margin-right: 20px;">
 
               {{ request.number_of_items_in_cart }}
-              <ion-icon name="cart-outline" s></ion-icon>
+              <ion-icon name="cart-outline"></ion-icon>
 
           </button>
         </form>
         {% comment %} CART {% endcomment %}
 
-          <form action="{% url 'staff:logout' %}" class="d-flex">
-            <button class="btn btn-outline-danger" >Logout, {{ user }}</button>
+          <form action="{% url 'user_profile:profile' %}" class="d-flex">
+            <button class="btn btn-outline-light">
+              {{ user }}
+              <ion-icon name="person-circle-outline"></ion-icon>
+            </button>
           </form>
         {% else %}
+
           <form action="{% url 'staff:login' %}" class="d-flex">
             <button class="btn btn-outline-success" >Login</button>
           </form>

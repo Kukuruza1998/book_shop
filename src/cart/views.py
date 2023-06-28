@@ -1,12 +1,7 @@
-from typing import Optional
 from django.views import generic
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth.forms import UserCreationForm
-from django.views.generic.edit import CreateView
-from django.contrib.auth import views as auth_views
 from django.views.generic import View
-from django.http import HttpResponseRedirect
 
 from cart.models import Cart, BookInOrder
 
@@ -68,6 +63,13 @@ class CartView(generic.DetailView):
         item = cart.books.get(id=item_id)
         item.delete()
         return redirect('cart:view_cart', cart_id=cart.id)
+    
+    
+    def order_details(request, order_id):
+      order = Order.objects.get(id=order_id)
+      return render(request, 'cart/order_details.html', {'order':order})
 
     def clear_cart(self):
         self.books.clear()
+
+    
