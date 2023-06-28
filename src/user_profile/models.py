@@ -45,7 +45,7 @@ class Account(models.Model):
         default=False
     )
     gender = models.CharField(
-        max_length=7,
+        max_length=10,
         gender=[
             ('Мужской','male'),
             ('Женский','female'), 
