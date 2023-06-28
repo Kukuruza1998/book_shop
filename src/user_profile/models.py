@@ -46,7 +46,7 @@ class Account(models.Model):
     )
     gender = models.CharField(
         max_length=7,
-        choices_sex=[
+        gender=[
             ('Мужской','male'),
             ('Женский','female'), 
             ('Не выбран','sex')
