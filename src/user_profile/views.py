@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from cart.models import Order
@@ -87,3 +88,9 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
     form_class = AccountUpdateForm
     template_name = 'user_profile/update_profile.html'
     success_url = reverse_lazy('user_profile:profile')
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        if obj.user != self.request.user:
+            raise Http404
+        return obj
