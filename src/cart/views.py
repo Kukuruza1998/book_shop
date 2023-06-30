@@ -39,7 +39,7 @@ class CartView(generic.DetailView):
     def get_object(self):
         user = self.request.user
         if user.is_authenticated:
-            return Cart.objects.get(user=user, id=self.kwargs.get('cart_id'))
+            return Cart.objects.get(user=user)
         return None
 
     def post(self, request, *args, **kwargs):
@@ -51,18 +51,18 @@ class CartView(generic.DetailView):
                 order.books.add(book_in_cart)
             cart.clear_cart()
 
-            return redirect('cart:view_cart', cart_id=cart.id)
+            return redirect('cart:view_cart')
         else:
             item_id = request.POST.get("item_id")
             count = request.POST.get("count")
             cart.update_count(item_id, count)
-            return redirect('cart:view_cart', cart_id=cart.id)
+            return redirect('cart:view_cart')
 
     def remove_item(request, cart_id, item_id):
         cart = Cart.objects.get(id=cart_id)
         item = cart.books.get(id=item_id)
         item.delete()
-        return redirect('cart:view_cart', cart_id=cart.id)
+        return redirect('cart:view_cart')
     
     def handle_cart(request):
       if request.method == "POST":
@@ -87,7 +87,7 @@ class CartView(generic.DetailView):
         carts = Cart.objects.all()
         for cart in carts:
             cart.books.filter(book__active='N').delete()   
-        return redirect('cart:view_cart', cart_id=cart.id)
+        return redirect('cart:view_cart')
     
     def order_details(request, order_id):
       order = Order.objects.get(id=order_id)
