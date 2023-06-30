@@ -83,7 +83,10 @@ class CartView(generic.DetailView):
                 book_obj.save()
             order.books.add(book)
       
-        cart.clear_cart()      
+        cart.clear_cart()
+        carts = Cart.objects.all()
+        for cart in carts:
+            cart.books.filter(book__active='N').delete()   
         return redirect('cart:view_cart', cart_id=cart.id)
     
     def order_details(request, order_id):
