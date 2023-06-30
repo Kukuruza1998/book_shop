@@ -64,6 +64,27 @@ class CartView(generic.DetailView):
         item.delete()
         return redirect('cart:view_cart', cart_id=cart.id)
     
+    def handle_cart(request):
+      if request.method == "POST":
+        cart = Cart.objects.get(id=request.POST.get('cart_id'))
+        order = Order.objects.create(
+            user=cart.user, 
+            total_price=cart.get_total_price()
+        )
+  
+        for book in cart.books.all():
+            book_obj = book.book
+            if book_obj.counter_book == book.count:
+                book_obj.counter_book -= book.count
+                book_obj.active = 'N'
+                book_obj.save()
+            else:
+                book_obj.counter_book -= book.count
+                book_obj.save()
+            order.books.add(book)
+      
+        cart.clear_cart()      
+        return redirect('cart:view_cart', cart_id=cart.id)
     
     def order_details(request, order_id):
       order = Order.objects.get(id=order_id)

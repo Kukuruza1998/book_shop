@@ -40,11 +40,11 @@
                 </div>
                 <div class="col-md-2 d-flex justify-content-center">
                   <div>
-                    <p class="small text-muted mb-4 pb-2">Количество</p>
+                    <p class="small text-muted mb-4 pb-2">Количество {{book.book.counter_book}}</p>
                     <p class="lead fw-normal mb-0">
                       <form action="{% url 'cart:update_item' cart_id=cart.id item_id=book.id %}" method="post">
                         {% csrf_token %}
-                        <input type="number" required name="count" min="1" value="{{ book.count }}">
+                        <input type="number" required name="count" min="1" max="{{book.book.counter_book}}" value="{{ book.count }}">
                         <input type="hidden" name="item_id" value="{{ book.id }}">
                         <button type="submit">Применить</button>
                       </form>
@@ -90,18 +90,20 @@
                 </p>
               </div>
               <div class="d-flex justify-content-end"> 
+
                 <button type="submit" name="checkout" form="checkout-form" 
                   class="btn btn-primary btn-lg" style="background:seagreen; border-color:seagreen;">
-                  Оплатить
+                  Оплатить 
                 </button>
+
               </div>
             </div>
-            <form method="post" id="checkout-form">
+            <form method="post" id="checkout-form" action="{% url 'cart:checkout' %}">
               {% csrf_token %}
               <input type="hidden" name="cart_id" value="{{ cart.id }}">
               <input type="hidden" name="total_price" value="{{ object.get_total_price }}">
               <button type="submit" class="d-none"></button>
-            </form>
+           </form>
           {% endif %} 
         </div>
         <input type="hidden" name="cart_id" value="{{ cart.id }}">
