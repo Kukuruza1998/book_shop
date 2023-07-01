@@ -1,13 +1,13 @@
 from django.shortcuts import render
-from random import randint
-from django.http import HttpResponse
-from django.http import HttpResponseRedirect
+
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from pathlib import Path
 
+from comments.views import *
 from . import models
+from comments.models import Comment
 from PIL import Image
 
 #Autor
@@ -137,9 +137,15 @@ class ViewBook(generic.DetailView):
         'book_name', 'book_image', 'book_price', 'autor', 'series',
           'genre', 'year_publishing', 'page', 'binding', 'format_book',
             'ISBN', 'weight', 'age_restrictions', 'publishing_house', 
-              'counter_book', 'active', 'rating'
+              'counter_book', 'active', 'rating', 'description'
     ]
     template_name = 'book-shop/book/view_book.html'
+
+    def get_context_data(self, **kwargs):
+      context = super().get_context_data(**kwargs)  
+      context['comments'] = Comment.objects.filter(book_id=self.object.id)
+      context['form'] = CommentForm() 
+      return context
     
 class BookCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = reverse_lazy("staff:login")
@@ -148,7 +154,7 @@ class BookCreateView(LoginRequiredMixin, generic.CreateView):
         'book_name', 'book_image', 'book_price', 'autor', 'series',
           'genre', 'year_publishing', 'page', 'binding', 'format_book',
             'ISBN', 'weight', 'age_restrictions', 'publishing_house', 
-              'counter_book', 'active', 'rating'
+              'counter_book', 'active', 'rating', 'description'
     ]
     template_name = 'book-shop/book/create_books.html'
 
@@ -159,7 +165,7 @@ class BookUpdateView(LoginRequiredMixin, generic.UpdateView):
         'book_name', 'book_image', 'book_price', 'autor', 'series',
           'genre', 'year_publishing', 'page', 'binding', 'format_book',
             'ISBN', 'weight', 'age_restrictions', 'publishing_house', 
-              'counter_book', 'active', 'rating'
+              'counter_book', 'active', 'rating', 'description'
     ]
     template_name = 'book-shop/book/update_books.html'
 

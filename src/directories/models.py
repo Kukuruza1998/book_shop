@@ -145,6 +145,11 @@ class Book(models.Model):
         verbose_name = 'ISBN',
         max_length = 25
     )
+    description = models.TextField(
+        verbose_name = "Description",
+        null = True,
+        blank = True
+    )
 
     weight = models.DecimalField(
         verbose_name = 'Book weight(gramme)',

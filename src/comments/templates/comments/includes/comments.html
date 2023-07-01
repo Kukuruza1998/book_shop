@@ -1,0 +1,121 @@
+{% load crispy_forms_tags %}
+<div class="accordion accordion-flush" id="accordionFlushExample">
+  <div class="accordion-item" style="padding-bottom: 10px;">
+    <h2 class="accordion-header" id="flush-headingOne">
+      <button class="accordion-button collapsed" style="border: 0.1rem solid #cfe2ff;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+        Описание
+      </button>
+    </h2>
+    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        {{object.description}}
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item" style="padding-bottom: 10px;">
+    <h2 class="accordion-header" id="flush-headingTwo">
+      <button class="accordion-button collapsed" style="border: 0.1rem solid #cfe2ff;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+        Доставка
+      </button>
+    </h2>
+    <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        <div class="std"><h4><strong><span style="color: #003366;">Для Минска</span></strong></h4>
+          <p>&nbsp;</p>
+          <h6><span style="color: #003366;">Курьером по Минску</span></h6>
+          <p><strong><br></strong></p>
+          <p>Курьер - супергерой нашего магазина! Доставит ваш заказ в любую точку Минска (в пределах МКАД, а также в микрорайоны Уручье и Шабаны) всего за&nbsp;<strong>6 рублей.</strong></p>
+          <p>А если вы закажете у нас больше, чем на&nbsp;<strong>100 рублей</strong>,&nbsp;— книги прибудут к вам&nbsp;<strong>бесплатно</strong><strong>!</strong></p>
+          <p>Курьер свяжется с вами по телефону после полной комплектаци заказа для уточнения удобного времени доставки. Вы подтверждаете, что сможете принять заказ в оговоренный промежуток времени по указанному адресу.</p>
+          <p><strong>График работы курьерской доставки:</strong> с понедельника по пятницу</p>
+          <p>&nbsp;</p>
+          <h6><span style="color: #003366;">Самовывоз в Минске (бесплатно)</span></h6>
+          <p>&nbsp;</p>
+          <p><strong><span>Самовывоз</span>&nbsp;</strong>—<strong>&nbsp;</strong>самый простой способ получить книги&nbsp;—&nbsp;забрать их самостоятельно. Это можно сделать по одному из указанных адресов:</p>
+          <p>&nbsp;</p>
+          <p><span><strong>1.</strong>&nbsp;<strong>Минск, ул. Притыцкого, 93. ТЦ "Алми", 1 этаж. </strong><span><span>Время работы: ежедневно с 10.00 до 21.00</span></span></span></p>
+          <p><strong>2.&nbsp;Минск, пр-т. Дзержинского, 91. ТЦ "Алми", 1 этаж.  </strong>Время работы: ежедневно с 10.00 до 21.00</p>
+          <p><strong><span style="font-size: small;"><br></span></strong></p>
+          <p><strong><span style="font-size: small;"><small><small>После комплектации заказа вам надо самостоятельно забрать его в течение </small></small></span><span style="font-size: small;"><small><small>7 календарных дней</small></small></span><span style="font-size: small;"><small><small>. Мы сообщим вам о наличии заказа в выбранном вами пункте самовывоза по электронной почте, телефону или SMS.&nbsp;</small></small></span></strong></p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <h4><strong><span style="color: #003366;">Для других городов</span></strong></h4>
+          <p>&nbsp;</p>
+          <h6><span style="color: #003366;">Самовывоз в регионах (бесплатно)</span></h6>
+          <p>&nbsp;</p>
+          <p><strong>1. Могилев</strong>: ул. Гагарина 79, ТРЦ "Корона-Сити" (1 этаж), магазин "Biblio.by" Время работы:&nbsp;ежедневно&nbsp;без обеда с&nbsp;10.00 до 21.00</p>
+          <p><strong>2.<strong>&nbsp;Могилев:</strong></strong>&nbsp;пр-т. Мира, 27, магазин "Biblio.by".&nbsp;Время работы:&nbsp;ежедневно&nbsp;без обеда с 10.00 до 20.00</p>
+          <p><strong>3. Гродно</strong><span>:&nbsp;ул. Победы, 47, ТРЦ «Е-Сити» (1 этаж),&nbsp;магазин "Территория Biblio.by".&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span>&nbsp;<span>с 10.00 до 21.00</span></span></p>
+          <p><strong>4. Борисов:</strong><span>&nbsp;ул. Гагарина, 107/2, ТРЦ "Е-Сити" (2 этаж),&nbsp;магазин "Территория Biblio.by".&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span>&nbsp;с&nbsp;10.00 до 20.00</span></p>
+          <p><strong>5. Брест</strong><span>: Варшавское шоссе, 11, ТРЦ «Е-Сити» (1 этаж)</span><span>,&nbsp;</span><span>магазин "</span><span>Территория Biblio.by"</span><span>.&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span><span>&nbsp;с&nbsp;10.00 до 21.00</span></span></p>
+          <p>&nbsp;</p>
+          <p>Доставка в указанные торговые объекты осуществляется один раз в неделю по пятницам. То есть, если срок комплектации вашего заказа - четверг или позже - мы отправим ваш заказ через неделю в четверг.</p>
+          <p><span style="font-size: small;"><strong><small><small>После комплектации заказа вам надо будет самостоятельно забрать его в течение 7 календарных дней. Мы сообщим вам о наличии заказа в выбранном вами пункте самовывоза по электронной почте, SMS или телефону.&nbsp;</small></small></strong></span></p>
+          <p>&nbsp;</p>
+          <h6><span style="color: #003366;">Почтой по Беларуси (3-5 дней)</span></h6>
+          <p><strong><br></strong></p>
+          <h3><strong>Наложенным платежом</strong></h3>
+          <p><strong></strong>Заказ высылается почтой по Беларуси на указанный вами адрес через отделение РУП "БелПочта". Оплата происходит на почте при получении заказа.</p>
+          <p><span>Заказ дороже 50 рублей высылается только по предоплате.&nbsp;</span></p>
+          <p>Стоимость пересылки рассчитывается &nbsp;по&nbsp;<a href="https://belpost.by/Tarify2/Tarifyyur" target="_blank">тарифам РУП "Белпочта" для юридических лиц.</a><br><br>Во время получения заказа на почте с вас возьмут еще до 5% от стоимости заказа (комиссия Белпочты за денежный перевод).</p>
+          <p><strong><br></strong></p>
+          <p>Преимущество предоплаты перед наложенным платежом заключается в том, что вам не придется платить за упаковку, а также 5% от стоимости заказа за почтовый перевод денежных средств --&gt; ДЕШЕВЛЕ.&nbsp;</p>
+          <p><span><strong><strong><span><strong><strong>Заказ на сумму больше 100 рублей мы доставим вам БЕСПЛАТНО!</strong></strong></span></strong></strong></span></p>
+          <hr>
+          <h6><span>Доставка за пределы Республики Беларусь не осуществляется</span></h6></div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item" style="padding-bottom: 10px;">
+    <h2 class="accordion-header" id="flush-headingThree">
+      <button class="accordion-button collapsed" style="border: 0.1rem solid #cfe2ff;" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+        Отзывы
+      </button>
+    </h2>
+    <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+      <div class="accordion-body">
+        
+        {% if comments %}
+          {% for comment in comments %}
+
+                    <div>
+                      <div>
+                        <!--Comment: rating-->
+                        <div>
+                          <p>{{ comment.rating }}<span style="color:gold;">★</span></p>
+                        </div>
+                        <!--Comment: rating END-->
+
+                        <!--User-->
+                        <div>
+                          <span>{{ comment.user.username }}</span>
+                          <div>
+                            {{ comment.created_at }}
+                          </div>
+                        </div>
+                        <!--User END-->
+                      </div>
+                      <!--Comment: text-->
+                      <div>
+                        <p>{{ comment.text }}</p>
+                      </div>
+                      <!--Comment: text END-->
+                    </div>
+                    <p>-----------------------------</p>   
+
+          {% endfor %}
+        {% else %}
+          <p>Нет комментариев</p>
+        {% endif %}
+        
+
+        <form action="{% url 'comments:add_comment' pk=book.id %}" method="post">
+          {% csrf_token %}
+          {{ form }}
+          <button type="submit">Опубликовать</button> 
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

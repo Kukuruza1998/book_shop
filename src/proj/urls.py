@@ -19,6 +19,7 @@ from django.urls import path, include
 from homepage import views as  homepage_views
 from django.conf import settings 
 from django.conf.urls.static import static
+from comments import urls as comments_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('staff/', include('staff.urls', namespace='staff')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('search/', include('search.urls', namespace='search')),
+    path('comments/', include(comments_urls, namespace='comments')),
     path('profile/', include('user_profile.urls', namespace='user_profile')),
     path('', homepage_views.HomePage.as_view(), name= 'homepage'),
 

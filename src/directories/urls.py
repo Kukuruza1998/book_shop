@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import include, path
 
 from . import views
 
@@ -28,6 +28,7 @@ urlpatterns = [
   #Books
       path('books/', views.BookView.as_view(), name="book-view"),
       path('view_book/<int:pk>', views.ViewBook.as_view(), name="view-book"),
+      # path('view_book/<int:pk>/', include('comments.urls', namespace='comments')),
       path('create_books/', views.BookCreateView.as_view(), name="create-book"),
       path('delete_books/<int:pk>', views.BookDeleteView.as_view(), name="delete-book"),
       path('update_books/<int:pk>', views.BookUpdateView.as_view(), name="update-book"),

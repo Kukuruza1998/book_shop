@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'homepage',
     'cart',
     'search',
-    'user_profile'
+    'user_profile',
+    'comments'
     
 ]
 
