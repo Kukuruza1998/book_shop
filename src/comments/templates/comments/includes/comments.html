@@ -111,7 +111,7 @@
 
         <form action="{% url 'comments:add_comment' pk=book.id %}" method="post">
           {% csrf_token %}
-          {{ form }}
+          {{ form|crispy }}
           <button type="submit">Опубликовать</button> 
         </form>
 
