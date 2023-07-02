@@ -62,6 +62,20 @@ class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=10, decimal_places=2)
     books = models.ManyToManyField(to=BookInOrder, blank=True)
+    description =  models.TextField(blank=True, null=True)
+
+    STATUS = (
+        ('Принято', 'Принято'),
+        ('В обработке', 'В обработке'),
+        ('Выполняется', 'Выполняется'),
+        ('Доставлено', 'Доставлено'),
+    )
+    status = models.CharField(
+        verbose_name = 'Book active',
+        max_length = 11,
+        default= 'Принято',
+        choices = STATUS
+    )
     created_at = models.DateTimeField(default=timezone.now)
     updated_at = models.DateTimeField(auto_now=True)
 

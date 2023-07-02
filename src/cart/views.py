@@ -46,7 +46,10 @@ class CartView(generic.DetailView):
         cart = self.get_object()
 
         if "checkout" in request.POST:
-            order = Order.objects.create(user=cart.user, total_price=cart.get_total_price())
+            order = Order.objects.create(
+                user=cart.user, 
+                total_price=cart.get_total_price()
+                )
             for book_in_cart in cart.books.all():
                 order.books.add(book_in_cart)
             cart.clear_cart()
@@ -67,9 +70,14 @@ class CartView(generic.DetailView):
     def handle_cart(request):
       if request.method == "POST":
         cart = Cart.objects.get(id=request.POST.get('cart_id'))
+        description=request.POST.get('description')
+        print(description)
+        if not description:
+          description = None
         order = Order.objects.create(
             user=cart.user, 
-            total_price=cart.get_total_price()
+            total_price=cart.get_total_price(),
+            description=description
         )
   
         for book in cart.books.all():
@@ -92,6 +100,10 @@ class CartView(generic.DetailView):
     def order_details(request, order_id):
       order = Order.objects.get(id=order_id)
       return render(request, 'cart/order_details.html', {'order':order})
+    
+    def orders_all(request):
+      orders = Order.objects.all()
+      return render(request, 'cart/orders_all.html', {'orders':orders})
 
     def clear_cart(self):
         self.books.clear()

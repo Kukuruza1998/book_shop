@@ -75,6 +75,10 @@
                     <p class="small text-muted mb-4 pb-2">Цена книги</p>
                     <p class="lead fw-normal mb-0">{{ book.book.book_price }} BYN</p>
                   </div>
+                  <div>
+                    <label>Описание заказа</label>
+                    <textarea name="description" id="description" cols="40" rows="10"></textarea>
+                  </div>
                 </div>
               </div>
             </div>
@@ -84,6 +88,7 @@
           {% if object.get_total_count != 0 %}
             <div class="card-body p-4">
               <div class="float-end">
+                
                 <p class="mb-0 me-5 d-flex align-items-center">
                   <span class="small text-muted me-2">Общая стоимость: </span> <span
                     class="lead fw-normal">{{ object.get_total_price }} BYN</span>
@@ -92,7 +97,8 @@
               <div class="d-flex justify-content-end"> 
 
                 <button type="submit" name="checkout" form="checkout-form" 
-                  class="btn btn-primary btn-lg" style="background:seagreen; border-color:seagreen;">
+                  class="btn btn-primary btn-lg" style="background:seagreen; border-color:seagreen;"
+                  onclick="submitFormWithTextarea();">
                   Оплатить 
                 </button>
 
@@ -102,6 +108,7 @@
               {% csrf_token %}
               <input type="hidden" name="cart_id" value="{{ cart.id }}">
               <input type="hidden" name="total_price" value="{{ object.get_total_price }}">
+              <input type="hidden" name="description" id="hidden_description" value="{{ description }}">
               <button type="submit" class="d-none"></button>
            </form>
           {% endif %} 
@@ -113,4 +120,11 @@
   </div>
 </div>
 
+<script>
+  function submitFormWithTextarea() {
+      var description = document.getElementById("description").value;
+      document.getElementById("hidden_description").value = description;
+      document.getElementById("checkout-form").submit();
+  }
+  </script>
 {% endblock BODY %}
