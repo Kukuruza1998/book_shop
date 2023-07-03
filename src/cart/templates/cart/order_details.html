@@ -34,7 +34,11 @@
       <p style="border-bottom: 1px solid;">Количество книг: {{ book_in_order.count }}шт.</p>
     {% else %}
       <p>Количество книг: {{ book_in_order.count }}шт.</p>
-      <p style="border-bottom: 1px solid;">Ваш комментарий к заказу: {{ order.description }}</p>
+      {% if user.is_superuser %}
+        <p style="border-bottom: 1px solid;">Комментарий к заказу: {{ order.description }}</p>
+      {% else %}
+        <p style="border-bottom: 1px solid;">Ваш комментарий к заказу: {{ order.description }}</p>
+      {% endif %}
     {% endif %}
     
       {% endfor %}

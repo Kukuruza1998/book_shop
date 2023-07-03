@@ -25,22 +25,22 @@
                   <img src="{{ book.book.book_picture_medium }}"
                     class="img-fluid" alt="Generic placeholder image">
                 </div>
-                <div class="col-md-2 d-flex justify-content-center">
+                <div class="col-md-1 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Название книги</p>
                     <p class="lead fw-normal mb-0">{{ book.book }}</p>
                   </div>
                 </div>
-                <div class="col-md-2 d-flex justify-content-center">
+                <div class="col-md-1 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Жанр книги</p>
                     <p class="lead fw-normal mb-0"><i class="fas fa-circle me-2" style="color: #fdd8d2;"></i>
                       {{ book.book.genre }}</p>
                   </div>
                 </div>
-                <div class="col-md-2 d-flex justify-content-center">
+                <div class="col-md-1 d-flex justify-content-center">
                   <div>
-                    <p class="small text-muted mb-4 pb-2">Количество {{book.book.counter_book}}</p>
+                    <p class="small text-muted mb-4 pb-2">Количество</p>
                     <p class="lead fw-normal mb-0">
                       <form action="{% url 'cart:update_item' cart_id=cart.id item_id=book.id %}" method="post">
                         {% csrf_token %}
@@ -51,7 +51,7 @@
                     </p>
                   </div>
                 </div>
-                <div class="col-md-2 d-flex justify-content-center">
+                <div class="col-md-1 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Итого</p>
                     {% for group in cart.get_grouped_price %}
@@ -70,12 +70,12 @@
                     </form>
                   </div>
                 </div>
-                <div class="col-md-2 d-flex justify-content-center">
+                <div class="col-md-3 d-flex justify-content-center">
                   <div>
                     <p class="small text-muted mb-4 pb-2">Цена книги</p>
                     <p class="lead fw-normal mb-0">{{ book.book.book_price }} BYN</p>
                   </div>
-                  <div>
+                  <div style="margin-left:20%">
                     <label>Описание заказа</label>
                     <textarea name="description" id="description" cols="40" rows="10"></textarea>
                   </div>
