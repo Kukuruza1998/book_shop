@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse_lazy
 
+
+
 # Create your models here.
 
 class Autor(models.Model):
@@ -193,6 +195,15 @@ class Book(models.Model):
     def __str__(self) -> str:
         return self.book_name
     
+    def calculate_rating(self):
+        from comments.models import Comment 
+        comments = Comment.objects.filter(book=self)
+        total = 0
+        for comment in comments:
+            total += comment.rating
+        self.rating = total / len(comments)
+        self.save()
+
     def get_absolute_url(self):
         return reverse_lazy('directories:success-page')
     
