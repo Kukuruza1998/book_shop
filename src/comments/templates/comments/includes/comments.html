@@ -43,11 +43,11 @@
           <p>&nbsp;</p>
           <h6><span style="color: #003366;">Самовывоз в регионах (бесплатно)</span></h6>
           <p>&nbsp;</p>
-          <p><strong>1. Могилев</strong>: ул. Гагарина 79, ТРЦ "Корона-Сити" (1 этаж), магазин "Biblio.by" Время работы:&nbsp;ежедневно&nbsp;без обеда с&nbsp;10.00 до 21.00</p>
-          <p><strong>2.<strong>&nbsp;Могилев:</strong></strong>&nbsp;пр-т. Мира, 27, магазин "Biblio.by".&nbsp;Время работы:&nbsp;ежедневно&nbsp;без обеда с 10.00 до 20.00</p>
-          <p><strong>3. Гродно</strong><span>:&nbsp;ул. Победы, 47, ТРЦ «Е-Сити» (1 этаж),&nbsp;магазин "Территория Biblio.by".&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span>&nbsp;<span>с 10.00 до 21.00</span></span></p>
-          <p><strong>4. Борисов:</strong><span>&nbsp;ул. Гагарина, 107/2, ТРЦ "Е-Сити" (2 этаж),&nbsp;магазин "Территория Biblio.by".&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span>&nbsp;с&nbsp;10.00 до 20.00</span></p>
-          <p><strong>5. Брест</strong><span>: Варшавское шоссе, 11, ТРЦ «Е-Сити» (1 этаж)</span><span>,&nbsp;</span><span>магазин "</span><span>Территория Biblio.by"</span><span>.&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span><span>&nbsp;с&nbsp;10.00 до 21.00</span></span></p>
+          <p><strong>1. Могилев</strong>: ул. Гагарина 79, ТРЦ "Корона-Сити" (1 этаж). Время работы:&nbsp;ежедневно&nbsp;без обеда с&nbsp;10.00 до 21.00</p>
+          <p><strong>2.<strong>&nbsp;Могилев:</strong></strong>&nbsp;пр-т. Мира, 27.&nbsp;Время работы:&nbsp;ежедневно&nbsp;без обеда с 10.00 до 20.00</p>
+          <p><strong>3. Гродно</strong><span>:&nbsp;ул. Победы, 47, ТРЦ «Е-Сити» (1 этаж)&nbsp;.&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span>&nbsp;<span>с 10.00 до 21.00</span></span></p>
+          <p><strong>4. Борисов:</strong><span>&nbsp;ул. Гагарина, 107/2, ТРЦ "Е-Сити" (2 этаж)&nbsp;.&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span>&nbsp;с&nbsp;10.00 до 20.00</span></p>
+          <p><strong>5. Брест</strong><span>: Варшавское шоссе, 11, ТРЦ «Е-Сити» (1 этаж)</span><span>&nbsp;</span><span>.&nbsp;<span>Время работы:&nbsp;</span><span>ежедневно&nbsp;</span><span>без обеда</span><span>&nbsp;с&nbsp;10.00 до 21.00</span></span></p>
           <p>&nbsp;</p>
           <p>Доставка в указанные торговые объекты осуществляется один раз в неделю по пятницам. То есть, если срок комплектации вашего заказа - четверг или позже - мы отправим ваш заказ через неделю в четверг.</p>
           <p><span style="font-size: small;"><strong><small><small>После комплектации заказа вам надо будет самостоятельно забрать его в течение 7 календарных дней. Мы сообщим вам о наличии заказа в выбранном вами пункте самовывоза по электронной почте, SMS или телефону.&nbsp;</small></small></strong></span></p>
@@ -80,26 +80,19 @@
 
                     <div>
                       <div>
-                        <!--Comment: rating-->
                         <div>
                           <p>{{ comment.rating }}<span style="color:gold;">★</span></p>
                         </div>
-                        <!--Comment: rating END-->
-
-                        <!--User-->
                         <div>
                           <span>{{ comment.user.username }}</span>
                           <div>
                             {{ comment.created_at }}
                           </div>
                         </div>
-                        <!--User END-->
                       </div>
-                      <!--Comment: text-->
                       <div>
                         <p>{{ comment.text }}</p>
                       </div>
-                      <!--Comment: text END-->
                     </div>
                     <p>-----------------------------</p>   
 
@@ -109,6 +102,8 @@
         {% endif %}
         
 
+
+        {% comment %} Сделать нормальную обёртку для комментариев {% endcomment %}
         <form action="{% url 'comments:add_comment' pk=book.id %}" method="post">
           {% csrf_token %}
           {{ form|crispy }}

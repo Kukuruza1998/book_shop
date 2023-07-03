@@ -2,6 +2,7 @@ from django.views import generic
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import View
+from cart.forms import ChangeStatusForm
 
 from cart.models import Cart, BookInOrder
 
@@ -73,7 +74,7 @@ class CartView(generic.DetailView):
         description=request.POST.get('description')
         print(description)
         if not description:
-          description = None
+          description = ""
         order = Order.objects.create(
             user=cart.user, 
             total_price=cart.get_total_price(),
@@ -99,7 +100,23 @@ class CartView(generic.DetailView):
     
     def order_details(request, order_id):
       order = Order.objects.get(id=order_id)
-      return render(request, 'cart/order_details.html', {'order':order})
+      if request.method == "POST":
+          form = ChangeStatusForm(request.POST)
+          if form.is_valid():     
+              if request.user.is_superuser:
+                  order.status = form.cleaned_data['status']
+                  order.save()    
+      else:
+          form = ChangeStatusForm()          
+      status_list = Order.STATUS      
+      return render(
+          request,
+          'cart/order_details.html', {
+              'order': order,
+              'form': form,  
+              'status_list': status_list                
+          }
+      )
     
     def orders_all(request):
       orders = Order.objects.all()
@@ -107,5 +124,4 @@ class CartView(generic.DetailView):
 
     def clear_cart(self):
         self.books.clear()
-
     

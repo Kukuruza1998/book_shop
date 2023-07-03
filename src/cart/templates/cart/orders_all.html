@@ -56,9 +56,7 @@
       <a href="{% url 'cart:order_details' order_id=order.pk %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
         <div class="book-block">
           <div class="card" style="width: 100%;">
-            <!-- Изображение книги -->
             <div class="card-body" style="width: 250px;">
-              <!-- Название книги, автор, рейтинг -->
               <div>
                 <h5 class="card-title">
                   <p id="title_book">
@@ -70,10 +68,8 @@
                   <p class="autor-in-card">
                     <p>Покупатель: {{ order.user.username }}</p>
                   </p>
-                  
                 </h5>
               </div>
-              <!--  Цена -->
               <p class="card-text" id="price-in-card-homepage">
                 <p>Заказ на сумму: {{ order.total_price }}BYN</p>
               </p>
@@ -87,37 +83,3 @@
     
   {% endblock %}
 {% endblock BODY %}
-
-<div class="container-book">
-  {% for order in orders %}
-    <a href="{% url 'cart:order_details' pk=object.pk %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
-      <div class="book-block">
-        <div class="card" style="width: 100%;">
-          <!-- Изображение книги -->
-          <div class="card-body" style="width: 250px;">
-            <!-- Название книги, автор, рейтинг -->
-            <div>
-              <h5 class="card-title">
-                <p id="title_book">
-                  Заказ №{{ order.id }}
-                </p>
-                <p class="card-text" id="p-in-card-homepage-rating">
-                  <p>Оформлен: {{ order.created_at }}</p>
-                </p>
-                <p class="autor-in-card">
-                  <p>Покупатель: {{ order.user.username }}</p>
-                </p>
-                
-              </h5>
-            </div>
-            <!--  Цена -->
-            <p class="card-text" id="price-in-card-homepage">
-              <p>Заказ на сумму: {{ order.total_price }}BYN</p>
-            </p>
-            <p>Статус заказа: {{ order.status }}</p>
-          </div>
-        </div>
-      </div>
-    </a>
-  {% endfor %}
-</div>
