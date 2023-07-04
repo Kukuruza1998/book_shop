@@ -75,7 +75,10 @@ p {
     <div class="div-text">
         <h5 style="font-size: 2em; font-weight: 400; word-break: normal;">{{object.book_name}}
           <p>
-          Автор: {{object.autor}}
+          Автор: 
+          <a href="{% url 'search:search' %}?q={{ object.autor }}">
+            {{ object.autor }}  
+          </a>
           </p>
           <p class="p_rating">
             Рейтинг: {{object.rating}}<span style="color:gold;">★</span>
@@ -122,7 +125,9 @@ p {
         Серия: {{object.series}}
         </p>
         <p>
-        Жанр: {{object.genre}}
+        Жанр: <a href="{% url 'search:search' %}?q={{ object.genre }}">
+                {{ object.genre }}  
+              </a>
         </p>
         <p>
         Год издательства: {{object.year_publishing}}

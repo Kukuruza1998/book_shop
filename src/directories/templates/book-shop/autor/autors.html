@@ -3,60 +3,30 @@
 {% block TITLE %}Autor{% endblock TITLE %}
 
 {% block BODY %}
-  {% if user.is_authenticated %}
+  {% if user.is_superuser %}
     <form action="{% url 'directories:add-autors' %}">
       <button class="btn btn-primary">Добавить</button>
     </form>
   {% endif %}
 
-  <div class="container-book">
+  <ul>
     {% for object in object_list %}
-    <div class="book-block">
-      <div class="card" style="width: 100%;">
-      
-        <div class="card-body">
-          <h5 class="card-title">{{object.autor_name}}</h5>
-          <p class="card-text">
-            <div class="accordion">
-              <div class="accordion-item">
-                <h2 class="accordion-header">
-
-                    <button class="accordion-button collapsed " 
-                      style="align-items: stretch; flex-direction: column;" 
-                      type="button" data-bs-toggle="collapse" 
-                      data-bs-target="#object{{ forloop.counter}}" aria-expanded="true" 
-                      aria-controls="panelsStayOpen-collapseOne">
-
-                      Autor description
-                    </button>
-
-                </h2>
-                
-                <div id="object{{ forloop.counter}}" class="accordion-collapse collapse">
-                  <div class="accordion-body" style="word-break: break-all;">
-                    {{object.autor_description}}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </p>
-        </div>
-        {% if user.is_authenticated %}
-          <a href="{% url 'directories:update-autors' pk=object.pk %}" 
-            class="btn btn-primary" style ="margin: .1rem .1rem">Изменить</a>
-
+       <li>
+          <a href="{% url 'search:search' %}?q={{ object.autor_name }}">
+             {{ object.autor_name }}  
+          </a>
           {% if user.is_superuser %}
+            <a href="{% url 'directories:update-autors' pk=object.pk %}" 
+              style ="margin-left:5%">Изменить</a>
 
             <a href="{% url 'directories:delete-autors' pk=object.pk %}" 
-              class="btn btn-primary" style ="margin: .1rem .1rem">Удалить</a>
+              style ="margin: .1rem .1rem">Удалить</a>
 
           {% endif %}
-        {% endif %}
+       </li>
+    
         
-      </div>
-    </div>
-  
-    {%endfor%}
-  </div>
+    {% endfor %}
+ </ul>
 
 {% endblock BODY %} 

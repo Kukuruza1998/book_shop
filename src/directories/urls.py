@@ -1,10 +1,11 @@
 from django.urls import include, path
-
 from . import views
 
 app_name = 'directories'
 
 urlpatterns = [
+    # includes
+      path('search/', include('search.urls', namespace='search')),
   #Autor
       path('autors/', views.AutorsView.as_view(), name="autors-view"),
       path('add_autors/', views.AddAutorsView.as_view(), name="add-autors"),
