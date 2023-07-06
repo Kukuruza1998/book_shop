@@ -9,13 +9,13 @@
       <p style="font-size:18px;">Покупатель: {{ order.user.username }}</p>
       <form method="post">
         {% csrf_token %}  
-        <div class="row" style="align-items: center; margin-left: 37%;">
+        <div class="row" style="align-items: center; margin-left: 35%;">
           <div class="col-3">
-            <select name="status" class="form-control" style="border: 1px solid;">
-            {% for status in status_list %}
-              <option value="{{ status.0 }}">{{ status.1 }}</option>
-            {% endfor %}
-          </select>
+            <select name="status" class="btn btn-outline-dark dropdown-toggle" style="border: 1px solid; ">
+              {% for status in status_list %}
+                <option value="{{ status.0 }}">{{ status.1 }}</option>
+              {% endfor %}
+            </select>
           </div>
           <div class="col-1">
             <input type="submit" class="btn btn-outline-dark" value="Изменить статус"/>
@@ -25,21 +25,19 @@
     {% endif %}
 
     <p style="font-size:18px;">Статус заказа: {{ order.status }}</p>
-    <p style="border-bottom: 1px solid; font-size:18px;">Заказ на сумму: {{ order.total_price }}BYN</p>
+    <p style="font-size:18px;">Заказ на сумму: {{ order.total_price }}BYN</p>
+    {% if order.description != "" %}
+      {% if user.is_superuser %}
+        <p style="border-bottom: 1px solid; font-size:18px;">Комментарий к заказу: {{ order.description }}</p>
+      {% else %}
+        <p style="border-bottom: 1px solid; font-size:18px;">Ваш комментарий к заказу: {{ order.description }}</p>
+      {% endif %}
+    {% endif %}
     {% for book_in_order in order.books.all %}
     <p style="border-top: 1px solid;">Название книги: {{ book_in_order.book.book_name }}</p>
     <p>Цена книги: {{ book_in_order.book.book_price }}BYN</p>
-
-    {% if order.description == "" %}
-      <p style="border-bottom: 1px solid;">Количество книг: {{ book_in_order.count }}шт.</p>
-    {% else %}
-      <p>Количество книг: {{ book_in_order.count }}шт.</p>
-      {% if user.is_superuser %}
-        <p style="border-bottom: 1px solid;">Комментарий к заказу: {{ order.description }}</p>
-      {% else %}
-        <p style="border-bottom: 1px solid;">Ваш комментарий к заказу: {{ order.description }}</p>
-      {% endif %}
-    {% endif %}
+    <p style="border-bottom: 1px solid;">Количество книг: {{ book_in_order.count }}шт.</p>
+      
     
       {% endfor %}
   {% endblock %}

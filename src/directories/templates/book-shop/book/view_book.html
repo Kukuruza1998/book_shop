@@ -14,8 +14,6 @@
   float: left;
   margin: 0 20px 5px 90px;
   width: 350px;
-  border-radius: 10px;
-  box-shadow: -15px 30px 12px rgba(0,0,0,0.2);
 }
 
 img {
@@ -76,7 +74,7 @@ p {
         <h5 style="font-size: 2em; font-weight: 400; word-break: normal;">{{object.book_name}}
           <p>
           Автор: 
-          <a href="{% url 'search:search' %}?q={{ object.autor }}">
+          <a href="{% url 'search:search' %}?q={{ object.autor }}" style="color: grey;">
             {{ object.autor }}  
           </a>
           </p>
@@ -125,7 +123,7 @@ p {
         Серия: {{object.series}}
         </p>
         <p>
-        Жанр: <a href="{% url 'search:search' %}?q={{ object.genre }}">
+        Жанр: <a href="{% url 'search:search' %}?q={{ object.genre }}" style="color: grey;">
                 {{ object.genre }}  
               </a>
         </p>

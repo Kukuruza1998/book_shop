@@ -1,31 +1,106 @@
 {% extends 'base.html' %}
 
 {% block TITLE %}Genre{% endblock TITLE %}
-
+{% block HEAD %}
+<style>
+  #knigi{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #knigi:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #series{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #series:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #genres{
+    background-color: white;
+    color: grey;
+    border: 2px grey solid;
+  }
+  #autors{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #autors:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #zakaz{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #zakaz:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+</style>
+<!--  background-color: grey; -->
+{% endblock HEAD %}
 {% block BODY %}
-  {% if user.is_authenticated %}
+{% include '../book/includes/nav_bar.html' %}
+
+  {% if user.is_superuser %}
     <form action="{% url 'directories:create-genre' %}">
       <button class="btn btn-primary">Добавить</button>
     </form>
   {% endif %}
 
-  <ul>
+  <p style="text-align: end; margin-right: 10%; font-size: 42px; margin-top: 70px;"> Жанры <ion-icon name="logo-python"></ion-icon></p>
+
+  <table class="table">
+    <thead>
+      <tr style="font-size: 28px; text-align: left;">
+        <th style="width: 30%;"><span style="margin-left: 55px;">Жанр</span></th>
+        <th style="width: 70%;"><span style="margin-left: 55px;">Описание</span></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
     {% for object in object_list %}
-       <li>
-          <a href="{% url 'search:search' %}?q={{ object.genre_name }}">
-             {{ object.genre_name }}  
-          </a>
-          {% if user.is_superuser %}
-            <a href="{% url 'directories:update-genre' pk=object.pk %}" 
-              style ="margin-left:5%">Изменить</a>
-
-            <a href="{% url 'directories:delete-genre' pk=object.pk %}" 
-              style ="margin: .1rem .1rem">Удалить</a>
-          {% endif %}
-       </li>
-    {% endfor %}
- </ul>
-
+    <tr style="text-align: left;">
+      <td id="autor-name">
+        <a href="{% url 'search:search' %}?q={{ object.genre_name }}" 
+          style="font-size: 24px; color: seagreen; text-decoration: none; margin-left: 55px;">
+            <span style="margin-top: 50%;">{{ object.genre_name }}</span>
+            
+        </a>
+      </td>
+      <td style="font-size: 18px;">
+        <span style="margin-left: 55px; display: inline-block;">{{ object.genre_description }}</span>
         
+      </td>
+      {% if user.is_superuser %}
+        <td>
+          <a href="{% url 'directories:update-genre' pk=object.pk %}" 
+            style ="margin-left:5%">Изменить</a>
+        </td>
+        <td>
+          <a href="{% url 'directories:delete-genre' pk=object.pk %}" 
+            style ="margin: .1rem .1rem">Удалить</a>
+        </td>
+        {% else %}
+        <td></td>
+        <td></td>
+      {% endif %} 
+    </tr>     
+    {% endfor %}
+    </tbody>
+  </table>
 
 {% endblock BODY %}

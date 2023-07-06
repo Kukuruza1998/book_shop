@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import UpdateView
 from .models import Account, Address
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.forms import UserChangeForm
 from django import forms
 from django.contrib.auth import get_user_model
@@ -54,6 +55,7 @@ class AccountUpdateForm(UserChangeForm, forms.ModelForm):
             self.fields['address1'].initial = self.instance.address.address1
             self.fields['address2'].initial = self.instance.address.address2
         del self.fields['last_login']
+        del self.fields['password']
         del self.fields['address']
         del self.fields['is_superuser']
         del self.fields['groups']
@@ -103,6 +105,9 @@ class AccountUpdate(LoginRequiredMixin, UpdateView):
       if created:
           address = Address.objects.create()
           Account.objects.create(user=instance, address=address)
+          group = Group.objects.get(name='Customers')
+          instance.groups.add(group)
+          
 
     @receiver(post_save, sender=User)
     def save_account(sender, instance, **kwargs):

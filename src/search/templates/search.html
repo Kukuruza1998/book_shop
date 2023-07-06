@@ -16,13 +16,13 @@
       display: inline-block;
       min-width: 18%;
       margin: 2% 2%;
-      border-radius: 10px;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+
+
       transition: all 0.3s ease-in-out;
     }
     .book-block:hover {
       border-radius: 10px;
-      box-shadow: 0 0 20px 25px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
     }
     .card-body {
       text-align: left;
@@ -63,7 +63,7 @@
     {% for book in books %}
       <a href="{% url 'directories:view-book' pk=book.pk %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
         <div class="book-block">
-          <div class="card" style="width: 100%;">
+          <div class="card" style="width: 100%; border:0">
             <!-- Изображение книги -->
             <img src="{{ book.book_picture_medium }}" width="250" height ="300" style="max-width: 250px; object-fit: fill" class="card-img-top" alt=" ">
             <div class="card-body" style="width: 250px;">

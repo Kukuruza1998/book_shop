@@ -1,0 +1,23 @@
+<p style="color:white; text-align: left; background: white; margin-bottom: 0;box-shadow: -1px 0px 8px rgba(0, 0, 0, 0.2);">
+  <a href="/#book" class="btn btn-outline-dark" id="knigi" style="height: 40px; width: 12%; border-radius:0; margin-right: 0.5%;">
+    Книги
+</a>
+  <a href="{% url "directories:series-view" %}" class="btn btn-outline-dark" id="series" style="height: 40px; width: 12%; border-radius:0; margin-right: 0.5%;">
+      Серии
+  </a>
+  <a href="{% url "directories:autors-view" %}" class="btn btn-outline-dark" id="autors" style="height: 40px; width: 12%; border-radius:0; margin-right: 0.5%;">
+      Авторы
+  </a>
+  <a href="{% url "directories:genre-list-view" %}" class="btn btn-outline-dark" id="genres" style="height: 40px; width: 12%; border-radius:0; margin-right: 0.5%;">
+      Жанры
+  </a>
+{% if user.is_superuser %}
+  <a href="{% url "cart:orders_all" %}" class="btn btn-outline-dark" id="zakaz" style="height: 40px; width: 48.6%; border-radius:0;">
+       Управление заказами
+  </a>
+{% else %}
+  <a:disabled href="{% url "cart:orders_all" %}" class="btn btn-outline-dark" id="zakaz" style=" color: white;height: 40px; width: 48.6%; background-color: grey; border: 0; border-radius:0; color: grey; pointer-events: none;">
+      Управление заказами
+    </a:disabled>
+{% endif %}    
+</p> 
