@@ -37,8 +37,38 @@
     <p style="border-top: 1px solid;">Название книги: {{ book_in_order.book.book_name }}</p>
     <p>Цена книги: {{ book_in_order.book.book_price }}BYN</p>
     <p style="border-bottom: 1px solid;">Количество книг: {{ book_in_order.count }}шт.</p>
+             
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="margin-top: 30%;">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel" style="color: #212529;">Отмена заказа №{{ order.id }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div>
+              Для отмены заказа свяжитесь с администрацией сайта
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Вернуться</button>
+          </div>
+        </div>
+      </div>
+    </div>
       
     
-      {% endfor %}
+  {% endfor %}
+    {% if not user.is_superuser %}
+      {% if order.status == "В обработке" %}
+        <button type="button" class="btn btn-primary btn-lg" 
+          style="background-color: #dc3545; border-color: #dc3545; border-radius: 16px; width: 20%;" 
+          data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+          Отменить заказ
+        </button> 
+      {% endif %}
+    {% endif %}
   {% endblock %}
 {% endblock BODY %}

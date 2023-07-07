@@ -4,8 +4,18 @@ from django.contrib import admin
 from .models import Cart, BookInOrder, Order
 
 admin.site.register(BookInOrder)
-admin.site.register(Order)
 
+@admin.register(Order)
+class OrderAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "get_books", 
+        "total_price",
+        "status",
+    )
+
+    def get_books(self, obj):
+        return "\n, ".join([str(book) for book in obj.books.all()])
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):

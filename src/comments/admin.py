@@ -3,4 +3,10 @@ from django.contrib import admin
 from . import models
 # Register your models here.
 
-admin.site.register(models.Comment)
+@admin.register(models.Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        "user",
+        "book",
+        "rating"
+    )

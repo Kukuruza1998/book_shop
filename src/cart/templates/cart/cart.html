@@ -78,6 +78,11 @@
             <p>итого</p>   
           </div>
         </div>
+      {% else %}
+        <div style="text-align: center; height: 200px; margin-top: 20%;">
+          <h2>Ваша корзина пуста <ion-icon name="bag-remove-outline" style="top: 1%;"></ion-icon></h2>
+          <a href="/" style="color: grey;"> За покупками!</a> 
+        </div>
       {% endif %} 
       <form method="post">
         {% csrf_token %}
@@ -210,7 +215,8 @@
                             
                             {% if  user.account.address.country %}
                             <button type="submit" name="checkout" form="checkout-form" class="btn btn-primary " 
-                              style="background-color: seagreen; border-color: seagreen; margin-left: 2%;  width: 40%;">
+                              style="background-color: seagreen; border-color: seagreen; margin-left: 2%;  width: 40%;"
+                              onclick="submitFormWithTextarea();">
                               Подтвердить 
                             </button>
                             {% else %}

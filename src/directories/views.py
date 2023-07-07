@@ -25,7 +25,7 @@ class AddAutorsView(LoginRequiredMixin, generic.CreateView):
     login_url = reverse_lazy("staff:login")
     model = models.Autor
     fields = [
-        'autor_name', 'autor_description'
+        'autor_name', 'autor_description', 'autor_image'
     ]
     template_name = "book-shop/autor/add_autors.html" 
         
@@ -33,7 +33,7 @@ class UpdateAutorsView(LoginRequiredMixin, generic.UpdateView):
     login_url = reverse_lazy("staff:login")
     model = models.Autor
     fields = [
-        'autor_name', 'autor_description'
+        'autor_name', 'autor_description', 'autor_image'
     ]
     template_name = "book-shop/autor/update_autors.html"
 
@@ -48,7 +48,7 @@ class GenreCreateView(LoginRequiredMixin, generic.CreateView):
     login_url = reverse_lazy("staff:login")
     model = models.Genre
     fields = [
-        'genre_name', 'genre_description'
+        'genre_name', 'genre_description', 'genre_image'
     ]
     template_name = 'book-shop/genre/creategenre.html'
 
@@ -56,7 +56,7 @@ class GenreUpdateView(LoginRequiredMixin, generic.UpdateView):
     login_url = reverse_lazy("staff:login")
     model = models.Genre
     fields = [
-        'genre_name', 'genre_description'
+        'genre_name', 'genre_description', 'genre_image'
     ]
     template_name = 'book-shop/genre/updategenre.html'
 

@@ -24,7 +24,7 @@
       style="background: white; text-align: center; font-family:Arial, Helvetica, sans-serif;width: 90%; 
       box-shadow: -1px 0px 8px rgba(0,0,0,0.2); padding-top: 2%; margin-top: -1.9%;">
       <a class="navbar-brand" href="/" style="color: seagreen; font-size: 3.2rem; margin-left: 40px;">
-          <span style="color: black;"><b>Boo</span>Shop</b>
+          <span style="color: black;"><b>Boo</span></b>Shop
       </a>
       <div class="collapse navbar-collapse" id="navbarCollapse">
 {% comment %} search {% endcomment %}
@@ -34,10 +34,10 @@
             <div class="input-group searchterm">
               <div class="form-field no-label" >
                 <input class="form-control" type="search" placeholder="Поиск" aria-label="Search" name="q" 
-                  style="border-radius: 40px 0 0 40px; width: 600px; margin-right: 0%; border-color: #212529;">
+                  style="border-radius: 40px 0 0 40px; width: 600px; margin-right: 0%; border-color: grey;">
               </div>
               <button class="btn btn-primary btn-icon-only icon-search" type="submit" 
-                style=" border-radius: 0 40px 40px 0; background-color: #212529; border-color: #212529; position:absolute; top: 0; left: 600px;">
+                style=" border-radius: 0 40px 40px 0; background-color: grey; border-color: grey; position:absolute; top: 0; left: 600px;">
                 <ion-icon name="search-outline"></ion-icon>
               </button>
             </div>
@@ -49,10 +49,10 @@
             <div class="input-group searchterm">
               <div class="form-field no-label" >
                 <input class="form-control" type="search" placeholder="Поиск" aria-label="Search" name="q" 
-                  style="border-radius: 40px 0 0 40px; width: 600px; margin-right: 0%; border-color: #212529;">
+                  style="border-radius: 40px 0 0 40px; width: 600px; margin-right: 0%; border-color: grey;">
               </div>
               <button class="btn btn-primary btn-icon-only icon-search" type="submit" 
-                style=" border-radius: 0 40px 40px 0; background-color: #212529; border-color: #212529; position:absolute; top: 0; left: 600px;">
+                style=" border-radius: 0 40px 40px 0; background-color: grey; border-color: grey; position:absolute; top: 0; left: 600px;">
                 <ion-icon name="search-outline"></ion-icon>
               </button>
             </div>
@@ -82,9 +82,9 @@
           <form action="{% url 'user_profile:profile' %}" class="d-flex" style="margin-right: 0; margin-top: 0.8rem;">
             <button class="btn btn-outline-dark" style=" border-color: white; background: white; color: #212529;" >
               <ion-icon name="person-circle-outline" style="font-size: 2rem;"></ion-icon> 
-              <p style="margin-top: -1rem; text-overflow: ellipsis;
+              <p style="margin-top: -0.8rem; text-overflow: ellipsis;
               white-space: nowrap;
-              overflow: hidden; width:70px">{{ user }}</p>
+              overflow: hidden; width:60px">{{ user }}</p>
             </button>
           </form>
         {% else %}

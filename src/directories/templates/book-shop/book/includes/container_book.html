@@ -48,9 +48,9 @@
 <div>
   <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1" style="background-color: grey;"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2" style="background-color: grey;"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3" style="background-color: grey;"></button>
     </div>
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -60,7 +60,10 @@
         </a>
       </div>
       <div class="carousel-item">
-        <img src="media/book/carusel1.jpg" class="d-block w-100" alt="...">
+        {% comment %} ССылка на автора в поиске query=autor {% endcomment %}
+        <a href="{% url 'search:search' %}?q=Агата+Кристи" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
+          <img src="media/book/carusel2.jpg" class="d-block w-100" alt="...">
+        </a>
       </div>
       <div class="carousel-item">
         <img src="media/book/carusel1.jpg" class="d-block w-100" alt="...">
@@ -89,7 +92,7 @@
         <div class="book-block">
           <div class="card" style="width: 100%; border:0">
             <!-- Изображение книги -->
-            <img src="{{ object.book_picture_medium }}" width="250" height ="300" style="max-width: 250px; object-fit: fill" class="card-img-top" alt=" ">
+            <img src="{{ object.book_picture_medium }}" width="auto" height ="300" style="max-width: 200px; margin-left: 10%; object-fit: fill;" class="card-img-top" alt=" ">
             <div class="card-body" style="width: 250px;">
               <!-- Название книги, автор, рейтинг -->
               <div>

@@ -71,8 +71,49 @@
 
             <p class="text-muted mb-0" style="font-size: 12px">Заказы:</p>
                 {% for order in orders %}
+                  
                   <p>
-                    <a href="{% url 'cart:order_details' order.id %}">Заказ №{{ order.id }}</a>
+                    {% if order.status == "В обработке" %}
+                    <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
+                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
+                         <span style="margin-right: 50%;">Заказ №{{ order.id }}</span>
+                         <span>
+                            В обработке
+                           <ion-icon name="reload-outline"></ion-icon>
+                         </span>
+                       </div>    
+                    </a>
+                    {% elif order.status == "Выполняется" %}
+                    <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
+                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
+                         <span style="margin-right: 48%;">Заказ №{{ order.id }}</span>
+                         <span>
+                            Выполняется
+                            <ion-icon name="car-outline"></ion-icon>
+                         </span>
+                       </div>    
+                    </a>
+                    {% elif order.status == "Доставлено" %}
+                    <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
+                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
+                         <span style="margin-right: 50%;">Заказ №{{ order.id }}</span>
+                         <span>
+                            Доставлено
+                            <ion-icon name="chevron-down-circle-outline"></ion-icon>
+                         </span>
+                       </div>    
+                    </a>
+                    {% elif order.status == "Отменен" %}
+                    <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
+                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
+                         <span style="margin-right: 54%;">Заказ №{{ order.id }}</span>
+                         <span>
+                           Отменен
+                            <ion-icon name="close-outline"></ion-icon>
+                         </span>
+                       </div>    
+                    </a>
+                    {% endif %}
                   </p>
                 {% empty %}
                   <p>Заказы отсутствуют</p>

@@ -65,15 +65,15 @@ class Order(models.Model):
     description =  models.TextField(blank=True, null=True)
 
     STATUS = (
-        ('Принято', 'Принято'),
         ('В обработке', 'В обработке'),
         ('Выполняется', 'Выполняется'),
         ('Доставлено', 'Доставлено'),
+        ('Отменен', 'Отменен'),
     )
     status = models.CharField(
-        verbose_name = 'Book active',
+        verbose_name = 'Статус заказа',
         max_length = 11,
-        default= 'Принято',
+        default= 'В обработке',
         choices = STATUS
     )
     created_at = models.DateTimeField(default=timezone.now)

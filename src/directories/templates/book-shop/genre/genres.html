@@ -48,6 +48,59 @@
     color: white;
     border: 0;
   }
+  /* Стили для текста в карточке */
+  #p-in-card-homepage-rating {
+      word-break: normal;
+      font-size: 12px;
+      font-weight: 400;
+      margin: 3px 0;
+      color: grey;
+      font-weight: 300;
+    }
+    /* Стили для блока книги */
+    .book-block {
+      display: inline-block;
+      min-width: 250px;
+      min-height: 400px;
+      max-height: 400px;
+      margin: 5% 2% 0 2%;
+      
+      transition: all 0.3s ease-in-out;
+    }
+    .book-block:hover {
+      border-radius: 10px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+    }
+    .card-body {
+      text-align: center;
+    }
+    .autor-in-card{
+      color: black;
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: 0.54px;
+    }
+    #title_book{
+      color: darkgreen;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+    #find-book{
+      color: grey;
+      text-align: center;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      position: absolute;
+      top: 370px;
+      left: 80px;
+    }
 </style>
 <!--  background-color: grey; -->
 {% endblock HEAD %}
@@ -60,47 +113,53 @@
     </form>
   {% endif %}
 
-  <p style="text-align: end; margin-right: 10%; font-size: 42px; margin-top: 70px;"> Жанры <ion-icon name="logo-python"></ion-icon></p>
+  <p style="text-align: end; margin-right: 10%; font-size: 36px; margin-top: 70px;"> 
+    Жанры
+    <img src="/media/genre/genre_default.jpg" alt=" " style="height: 100px; margin-left: 15px;">
+  </p>
 
-  <table class="table">
-    <thead>
-      <tr style="font-size: 28px; text-align: left;">
-        <th style="width: 30%;"><span style="margin-left: 55px;">Жанр</span></th>
-        <th style="width: 70%;"><span style="margin-left: 55px;">Описание</span></th>
-        <th></th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
+  <div class="container-book" style="text-align: left; margin-left: 5.5%;">
     {% for object in object_list %}
-    <tr style="text-align: left;">
-      <td id="autor-name">
         <a href="{% url 'search:search' %}?q={{ object.genre_name }}" 
-          style="font-size: 24px; color: seagreen; text-decoration: none; margin-left: 55px;">
-            <span style="margin-top: 50%;">{{ object.genre_name }}</span>
+          style=" text-decoration: none;">
+          <div class="book-block">
+            <div class="card" style="width: 100%; border:0">
+              <!-- Изображение книги -->
+              <img src="{{ object.genre_image.url }}" width="117" height ="145" style="max-width: 117px; margin-top: 25px; margin-left: 28%; object-fit: fill;" class="card-img-top" alt=" ">
+              <div class="card-body" style="width: 250px;">
+                <!-- Название книги, автор, рейтинг -->
+                <div>
+                  <h5 class="card-title">
+                    <p id="title_book">
+                      {{ object.genre_name }}
+                    </p>
+                    <p class="autor-in-card">
+                      {{ object.genre_description }}
+                    </p>
+                  </h5>
+                </div>
+                {% if not user.is_superuser %}
+                  <p id="find-book">
+                    <a href="{% url 'directories:update-genre' pk=object.pk %}">
+                      Изменить
+                    </a>
+                    <a href="{% url 'directories:delete-genre' pk=object.pk %}">
+                      Удалить
+                    </a>
+                  </p>
+                {% else %}
+                  <p id="find-book">Найти книги... </p>
+                    
+                  
+                {% endif %}  
+              </div>
+            </div>
+          </div>
             
         </a>
-      </td>
-      <td style="font-size: 18px;">
-        <span style="margin-left: 55px; display: inline-block;">{{ object.genre_description }}</span>
-        
-      </td>
-      {% if user.is_superuser %}
-        <td>
-          <a href="{% url 'directories:update-genre' pk=object.pk %}" 
-            style ="margin-left:5%">Изменить</a>
-        </td>
-        <td>
-          <a href="{% url 'directories:delete-genre' pk=object.pk %}" 
-            style ="margin: .1rem .1rem">Удалить</a>
-        </td>
-        {% else %}
-        <td></td>
-        <td></td>
-      {% endif %} 
-    </tr>     
+       
+          
     {% endfor %}
-    </tbody>
-  </table>
+  </div>
 
 {% endblock BODY %}

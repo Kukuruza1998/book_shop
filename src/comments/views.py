@@ -19,9 +19,13 @@ def add_comment(request, pk):
             comment.save()
             book = get_object_or_404(Book, pk=pk)
             book.calculate_rating()
-            return redirect('directories:view-book', pk=pk)   
+            return redirect('directories:view-book', pk=pk)
+        else:
+            return redirect('directories:view-book', pk=pk)
+        
     else:
-        form = CommentForm()     
+        form = CommentForm()
+        
         return render(request, 'comments/includes/comments.html', {
             'comments': comments, 
             'form': form

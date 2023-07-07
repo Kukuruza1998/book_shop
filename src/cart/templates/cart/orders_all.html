@@ -73,7 +73,25 @@
               <p class="card-text" id="price-in-card-homepage">
                 <p>Заказ на сумму: {{ order.total_price }}BYN</p>
               </p>
-              <p>Статус заказа: {{ order.status }}</p>
+              {% if order.status == "В обработке" %}
+                <div class="alert alert-primary" role="alert" style="height:45px;">
+                  <p style="margin-top: -3%;">{{ order.status }}</p>
+                </div>
+              {% elif order.status == "Выполняется" %}
+                <div class="alert alert-warning" role="alert" style="height:45px;">
+                  <p style="margin-top: -3%;">{{ order.status }}</p>
+                </div>
+              {% elif order.status == "Доставлено" %}
+                <div class="alert alert-success" role="alert" style="height:45px;">
+                  <p style="margin-top: -3%;">{{ order.status }}</p>
+                </div>
+              {% elif order.status == "Отменен" %}
+                <div class="alert alert-danger" role="alert" style="height:45px;">
+                  <p style="margin-top: -3%;">{{ order.status }}</p>
+                </div>
+              {% endif %}
+
+
             </div>
           </div>
         </div>

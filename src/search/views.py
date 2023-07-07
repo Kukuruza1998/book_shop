@@ -8,7 +8,8 @@ def search(request):
         books = Book.objects.filter(
             Q(book_name__icontains=query) |
             Q(autor__autor_name__icontains=query) |
-            Q(genre__genre_name__icontains=query)
+            Q(genre__genre_name__icontains=query) |
+            Q(series__series_name__icontains=query)
         )
     else:
         books = Book.objects.all()

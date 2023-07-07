@@ -15,6 +15,10 @@ class Autor(models.Model):
         null = True,
         blank = True
     )
+    autor_image = models.ImageField(
+        blank = True,
+        upload_to = "autor/"
+    )
 
     def __str__(self) -> str:
         return self.autor_name
@@ -33,6 +37,10 @@ class Genre(models.Model):
         verbose_name = 'Genre description',
         null = True,
         blank = True
+    )
+    genre_image = models.ImageField(
+        blank = True,
+        upload_to = "genre/"
     )
 
     def __str__(self) -> str:
@@ -189,7 +197,7 @@ class Book(models.Model):
     rating = models.DecimalField(
         verbose_name = 'Rating',
         max_digits = 2,
-        decimal_places = 1,
+        decimal_places = 0,
         default = 0
     )
     def __str__(self) -> str:
