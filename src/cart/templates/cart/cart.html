@@ -67,16 +67,9 @@
 
 
       {% if object.get_total_count != 0 %}
-        <div style="  margin: 0; padding: 1% 0 0 0; border-top: 1px solid #dee2e6;font-weight: bold;">
-          <div style="display: inline-block; margin-left: 35%; margin-right: 6%;">
-            <p>цена за 1 шт.</p>
-          </div>
-          <div style="display: inline-block; ">
-            <p>кол-во</p>
-          </div>
-          <div style="display: inline-block; margin-left: 5%;">
-            <p>итого</p>   
-          </div>
+        <div style="  margin: 1% 0 2% 0; padding: 2% 0 1% 0; border-bottom: 1px solid black; text-align: left;font-size: 34px;">
+          <span style="margin-left: 1%;">Ваш заказ</span>
+          
         </div>
       {% else %}
         <div style="text-align: center; height: 200px; margin-top: 20%;">
@@ -87,179 +80,201 @@
       <form method="post">
         {% csrf_token %}
         {% for book in object.books.all %}
-          <div class="card mb-4" style="max-height: 10%;">
-            <div class="card-body p-4">
-              <div class="row align-items-center">
-                <div class="col-md-2">
-                  <img src="{{ book.book.book_picture_medium }}"
-                    class="img-fluid" alt="Generic placeholder image" style="height: 200px;">
-                    <!-- ВЫСОТА КНИГИ -->
-                </div>
-                <div class="col-md-4 d-flex justify-content-center">
-                  <div>
-                    <p class="lead fw-normal">
-                      <h3 style="text-transform: uppercase; margin-bottom: -15px;">
-                        {{ book.book }}
-                      </h3>
-                      
-                    </p>
-                    <p class="lead fw-normal" style="font-size: 14px;">
-                      {{ book.book.autor }}
-                    </p>
-                    <p class="lead fw-normal" style="font-size: 14px; color: grey;">
-                      {{ book.book.genre }}
-                    </p>
-                  </div>
-                </div>
-                <div class="col-md-2 d-flex justify-content-center">
-                  <div>
 
-                    <p class="lead fw-normal mb-0">{{ book.book.book_price }} BYN</p>
-                  </div>
-                  
-                </div>
-                <div class="col-md-1 d-flex justify-content-center">
-                  <div>
-                    <!-- КОЛИЧЕСТВО -->
-                    <p class="lead fw-normal mb-0">
-                      <form method="post" id="counter-book" action="{% url 'cart:update_item' cart_id=cart.id item_id=book.id %}" >
-                        {% csrf_token %}
-                        <input type="number" required name="count" min="1" max="{{book.book.counter_book}}" value="{{ book.count }}">
-                        <input type="hidden" name="item_id" value="{{ book.id }}">
-                        <!-- КНОПКА КОЛИЧЕСТВА -->
-                        
-                        <button class="btn border-danger" style=" color: #dc3545; border-radius: 15px;">
-                          {% comment %} position:absolute; right:23%; top:55%; {% endcomment %}
-                          Обновить стоимость
-                        </button>
-                      </form>
-                    </p>
-                  </div>
-                </div>
-                <div class="col-md-1 d-flex justify-content-center">
-                  <div>
-                    {% for group in cart.get_grouped_price %}
-                      {% if group.price == book.book.book_price %}
-                        <p class="lead fw-normal mb-0">
-                          <b>
-                            {{ group.total_price }} BYN
-                          </b>
-                        </p>
-                      {% endif %}  
-                    {% endfor %}
-                  </div>
-                </div>
-                <div class="col-md-2 d-flex justify-content-center" style="align-items:end;">
+        <div style="margin-bottom: 2%;">
+          <div class="row">
+            <!-- IMG BOOK -->
+            <div class="col" style="text-align: right;">
+              <img src="{{ book.book.book_picture_medium }}" alt="Generic placeholder image" style="height: 150px;">
+            </div>
 
-                  <div>
-                    
+            <div class="col"></div>
 
-                    <!-- Удаление -->
-                    <form action="{% url 'cart:remove_item' cart_id=cart.id item_id=book.id %}" method="post">
-                      {% csrf_token %}
-                      <input type="hidden" name="item_id" value="{{ book.id }}">
-                      <button class="btn btn-light" type="submit"
-                        style="background-color: white; border-color: white; color: grey;">
-                        Удалить<ion-icon name="trash-outline"></ion-icon>
-                      </button>
-                    </form>
-                  </div>
+            <div class="col" style="text-align: left; border-bottom: 1px solid #dee2e6; margin-left: -8%;">
+              <!-- BOOK NAME -->
+              <p style="font-size: 20px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;">
+                {{ book.book }}
+              </p>
+              <!-- AUTOR NAME -->
+              <p style="font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal; color: grey;">
+                {{ book.book.autor }}
+              </p>
+              <!-- В НАЛИЧИИ -->
+              <p style="font-size: 14px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal; color: seagreen;">
+                В наличии книг: {{book.book.counter_book}}
+              </p>
+            </div>
+
+            
+            <div class="col" style="text-align: left; border-bottom: 1px solid #dee2e6;"></div>
+            <div class="col" style="text-align: left; border-bottom: 1px solid #dee2e6;"></div>
+
+            <div class="col" style="text-align: right; border-bottom: 1px solid #dee2e6;">
+              <!-- PRICE -->
+              <p style="margin-left: 25%; font-size: 18px;
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+              letter-spacing: 0.72px; color: grey; margin-top: 5%;">{{ book.book.book_price }} BYN</p>
+            </div>
+
+            <div class="col" style="text-align: left; border-bottom: 1px solid #dee2e6;">
+              <!-- COUNTER BOOK -->
+                <form method="post" id="counter-book" action="{% url 'cart:update_item' cart_id=cart.id item_id=book.id %}" >
+                  {% csrf_token %}
+                  <input type="number" required name="count" min="1" max="{{book.book.counter_book}}" value="{{ book.count }}" style="margin-left: 25%; font-size: 20px;">
+                  <input type="hidden" name="item_id" value="{{ book.id }}">
+  
+                  <!-- КНОПКА КОЛИЧЕСТВА -->
+                  <button class="btn border-danger" style=" color: #dc3545; border-radius: 15px; margin-left: -45%; margin-bottom: -30%; width: 220px;">
+                    Обновить стоимость
+                  </button>
+                </form>
+            </div>
+
+            <div class="col" style="text-align: right; border-bottom: 1px solid #dee2e6; padding-bottom: 3%;">
+              <!-- DELETE BOOK -->
+              <form action="{% url 'cart:remove_item' cart_id=cart.id item_id=book.id %}" method="post">
+                {% csrf_token %}
+                  <input type="hidden" name="item_id" value="{{ book.id }}">
+                  <button class="btn btn-light" type="submit"
+                    style="background-color: white; border-color: white; color: grey; height: 20px; margin-top: -25%;">
+                    <ion-icon name="trash-outline"></ion-icon>
+                  </button>
+                </form>
+  
+                <!-- ОБЩАЯ ЦЕНА ЗА КНИГУ -->
+                <div style="margin-top: 40%; margin-left: -15%;">
+                  {% for group in cart.get_grouped_price %}
+                    {% if group.price == book.book.book_price %}
+                      <p style="color: black; font-size: 28px; font-style: normal; font-weight: 700; line-height: normal; letter-spacing: 0.96px;">
+                          {{ group.total_price }} BYN
+                      </p>
+                    {% endif %}  
+                  {% endfor %}
                 </div>
+            </div>
+
+          </div>
+        </div>
+        {% endfor %}
+        
+        <div class="row" style="border-top: 1px solid black; padding-top: 2%; margin-top: -2%;">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col" style="text-align: right;">
+            <span style="font-size: 24px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: 0.84px; color: grey;">{{ object.get_total_count }} товаров</span>
+          </div>
+
+          <div class="col" style="text-align: right;">
+            <span style="font-size: 32px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            letter-spacing: 1.08px; color: seagreen;">{{ object.get_total_price }} BYN</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" 
+              style="background-color: seagreen; border-color: seagreen; border-radius: 25px; width: 250%; margin-left: -30%; margin-top: 30%;" 
+              data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              <span style="font-size: 18px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal; color: white;">ОФОРМИТЬ</span>
+              
+            </button>
+          </div>
+          <div class="col"></div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
+          aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content" style="margin-top: 30%;">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel" style="color: #212529;">Подтверждение заказа</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div style="text-align: right;">
+                  <p>Итого:</p>
+                  {% for book in object.books.all %}
+                    <p>Книга: {{book.book}} в количестве {{ book.count }}шт.</p>
+                  {% endfor %}
+                  <p>Сумма заказа: {{object.get_total_price}} BYN</p>
+                  <textarea  name="description" id="description" placeholder="   Комментарий к заказу"  rows="4" 
+                    style="width: 100%; margin-bottom: 1.5%;"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Вернуться</button>
+                
+                {% if user.account.address.country %}
+                <button type="submit" name="checkout" form="checkout-form" class="btn btn-primary " 
+                  style="background-color: seagreen; border-color: seagreen; margin-left: 2%;  width: 40%;"
+                  onclick="submitFormWithTextarea();">
+                  Подтвердить 
+                </button>
+                {% else %}
+                <button disabled type="submit" name="checkout" form="checkout-form" class="btn btn-primary " 
+                  style="background-color: seagreen; border-color: seagreen; margin-left: 2%;  width: 40%;"
+                  onclick="submitFormWithTextarea();">
+                  Добавьте адресс в профиль 
+                </button>
+                {% endif %}
                 
               </div>
             </div>
           </div>
-        {% endfor %}
-        
-        
-          {% if object.get_total_count != 0 %}
-          
-          <div class="card mb-4" style="background-color: #212529;">
-            <div class="card-body p-1">
-              <div style="text-align: end;">
-                
-                <p class=" align-items-center" style="color: white; font-size: 1.5rem; margin-top: 2%;">
-                  <span>ИТОГО:</span>
-                  <span style="margin-left: 5%;">{{ object.get_total_count }} товаров</span>
-                  <span style="margin-left: 3%;">{{ object.get_total_price }} BYN</span>
-                  <!-- Оплата -->    
-                   <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary btn-lg" 
-                      style="background-color: #dc3545; border-color: #dc3545; margin-left: 2%; border-radius: 16px; width: 20%;" 
-                      data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                      ОФОРМИТЬ ЗАКАЗ
-                    </button>  
-                    <!-- Modal -->
-                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" 
-                      aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                      <div class="modal-dialog">
-                        <div class="modal-content" style="margin-top: 30%;">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel" style="color: #212529;">Подтверждение заказа</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                          </div>
-                          <div class="modal-body">
-                            <div>
-                              <p>Итого:</p>
-                              {% for book in object.books.all %}
-                                <p>Книга: {{book.book}} в количестве {{ book.count }}шт.</p>
-                              {% endfor %}
-                              <p>Сумма заказа: {{object.get_total_price}} BYN</p>
-
-                              <textarea  name="description" id="description" placeholder="   Комментарий к заказу"  rows="4" 
-                                style="width: 100%; margin-bottom: 1.5%;"></textarea>
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Вернуться</button>
-                            
-                            {% if  user.account.address.country %}
-                            <button type="submit" name="checkout" form="checkout-form" class="btn btn-primary " 
-                              style="background-color: seagreen; border-color: seagreen; margin-left: 2%;  width: 40%;"
-                              onclick="submitFormWithTextarea();">
-                              Подтвердить 
-                            </button>
-                            {% else %}
-                            <button disabled type="submit" name="checkout" form="checkout-form" class="btn btn-primary " 
-                              style="background-color: seagreen; border-color: seagreen; margin-left: 2%;  width: 40%;"
-                              onclick="submitFormWithTextarea();">
-                              Добавьте адресс в профиль 
-                            </button>
-                            {% endif %}
-                            
-                          </div>
-                        </div>
-                      </div>
-                    </div>     
-                             
-                </p>
-              </div>
-            <div> 
-          </div>
         </div>
-            <form method="post" id="checkout-form" action="{% url 'cart:checkout' %}">
-              {% csrf_token %}
-              <input type="hidden" name="cart_id" value="{{ cart.id }}">
-              <input type="hidden" name="total_price" value="{{ object.get_total_price }}">
-              <input type="hidden" name="description" id="hidden_description" value="{{ description }}">
-              <button type="submit" class="d-none"></button>
-           </form>
-          {% endif %} 
-        </div>
+      </div>
+      <form method="post" id="checkout-form" action="{% url 'cart:checkout' %}">
+        {% csrf_token %}
         <input type="hidden" name="cart_id" value="{{ cart.id }}">
-        <input type="hidden" name="item_id" value="">
-      </form>
-    </div>
+        <input type="hidden" name="total_price" value="{{ object.get_total_price }}">
+        <input type="hidden" name="description" id="hidden_description" value="{{ description }}">
+        <button type="submit" class="d-none"></button>
+     </form>
   </div>
+  <input type="hidden" name="cart_id" value="{{ cart.id }}">
+  <input type="hidden" name="item_id" value="">
+</form>
+</div>
+</div>
 </div>
 
 <script>
-  function submitFormWithTextarea() {
-      var description = document.getElementById("description").value;
-      document.getElementById("hidden_description").value = description;
-      document.getElementById("checkout-form").submit();
-  }
+function submitFormWithTextarea() {
+  var description = document.getElementById("description").value;
+  document.getElementById("hidden_description").value = description;
+  document.getElementById("checkout-form").submit();
+}
 
- 
+
 </script>
 {% endblock BODY %}
