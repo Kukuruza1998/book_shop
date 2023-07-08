@@ -3,7 +3,7 @@
 {% block HEAD %}
 <style>
   /* Стили для текста в карточке */
-  #p-in-card-homepage-rating {
+    #p-in-card-homepage-rating {
       word-break: normal;
       font-size: 12px;
       font-weight: 400;
@@ -15,9 +15,8 @@
     .book-block {
       display: inline-block;
       min-width: 18%;
-      margin: 2% 2%;
-
-
+      margin: 2% 3.2%;
+      
       transition: all 0.3s ease-in-out;
     }
     .book-block:hover {
@@ -59,13 +58,14 @@
   {% if books %}
   <h2 style="color:darkgreen; margin-bottom: 0;">Результаты поиска: </h2>
   <p id="p-query">(поиск по запросу "{{query}}")</p>
-  <div class="container-book">
+
+  <div class="container-book" style="text-align: left;">
     {% for book in books %}
       <a href="{% url 'directories:view-book' pk=book.pk %}" style="text-decoration: none; color: rgba(255, 255, 255, 0.55);">
         <div class="book-block">
           <div class="card" style="width: 100%; border:0">
             <!-- Изображение книги -->
-            <img src="{{ book.book_picture_medium }}" width="250" height ="300" style="max-width: 250px; object-fit: fill" class="card-img-top" alt=" ">
+            <img src="{{ book.book_picture_medium }}" width="auto" height ="300" style="max-width: 200px; margin-left: 10%; object-fit: fill;" class="card-img-top" alt=" ">
             <div class="card-body" style="width: 250px;">
               <!-- Название книги, автор, рейтинг -->
               <div>

@@ -138,7 +138,7 @@
                     </p>
                   </h5>
                 </div>
-                {% if not user.is_superuser %}
+                {% if user.is_superuser %}
                   <p id="find-book">
                     <a href="{% url 'directories:update-genre' pk=object.pk %}">
                       Изменить
