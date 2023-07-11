@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'cart',
     'search',
     'user_profile',
-    'comments'
+    'comments',
     
 ]
 

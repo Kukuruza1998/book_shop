@@ -33,11 +33,11 @@ User = get_user_model()
 class AccountUpdateForm(UserChangeForm, forms.ModelForm):
     first_name = forms.CharField(max_length=30, required=False)
     last_name = forms.CharField(max_length=30, required=False)
-    country = forms.CharField(max_length=15, required=False)
-    city = forms.CharField(max_length=15, required=False)
+    country = forms.CharField(max_length=30, required=False)
+    city = forms.CharField(max_length=20, required=False)
     zip_code = forms.DecimalField(max_digits=15, decimal_places=0, required=False)
-    address1 = forms.CharField(max_length=20, required=False)
-    address2 = forms.CharField(max_length=20, required=False)
+    address1 = forms.CharField(max_length=50, required=False)
+    address2 = forms.CharField(max_length=50, required=False)
     class Meta:
         model = Account
         fields = ['phone', 'view_personal_info', 'gender', 'address']
@@ -48,6 +48,8 @@ class AccountUpdateForm(UserChangeForm, forms.ModelForm):
             self.fields[fieldname] = UserChangeForm.base_fields[fieldname]
         self.fields['first_name'].initial = self.instance.user.first_name
         self.fields['last_name'].initial = self.instance.user.last_name
+        self.fields['email'].initial = self.instance.user.email
+
         if self.instance.address:
             self.fields['country'].initial = self.instance.address.country
             self.fields['city'].initial = self.instance.address.city
@@ -68,6 +70,7 @@ class AccountUpdateForm(UserChangeForm, forms.ModelForm):
         user = self.instance.user
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
+        user.email = self.cleaned_data['email']
         if commit:
             user.save()
         account = super().save(commit=False)

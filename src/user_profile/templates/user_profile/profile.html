@@ -5,79 +5,158 @@
 {% block TITLE %}Profile{% endblock TITLE %}
 
 {% block HEAD %}
-
+<style>
+  #knigi{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #knigi:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #series{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #series:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #genres{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #genres:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #autors{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #autors:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+  #zakaz{
+    background-color: grey;
+    color: white;
+    border: 0;
+  }
+  #zakaz:hover{
+    background-color: darkgrey;
+    color: white;
+    border: 0;
+  }
+</style>
+<!--  background-color: grey; -->
 {% endblock HEAD %}
 
 {% block BODY %}
 {% block content %}
-<br><br>
-<div class="container mx-auto">
-    <div class="row" style="margin-left:20%;">
-      <div class="col-sm-12 col-md-12 col-lg-9 pb-4">
-        <div class="card p-4">
-          <h4 class="card-title font-weight-bold text-center">Profile: {{ user.username|title }}</h4>
-            <hr>
-          <div class="card-text">
-            <p class="text-muted mb-0" style="font-size: 12px">Логин:</p>
-            <p>{{ user.username }}</p>
-            {% if account.view_personal_info %}
-              {% if user.email != "" %}
-                <p class="text-muted mb-0" style="font-size: 12px">Email:</p>
-                <p>{{ user.email }}</p>
-              {% endif %}
-              {% if user.first_name != "" %}
-                <p class="text-muted mb-0" style="font-size: 12px">Имя:</p>
-                <p>{{ user.first_name }}</p>
-              {% endif %}
-              {% if user.last_name != "" %}
-                <p class="text-muted mb-0" style="font-size: 12px">Фамилия:</p>
-                <p>{{ user.last_name }}</p>
-              {% endif %}
-                <p class="text-muted mb-0" style="font-size: 12px">Телефон:</p>
-                <p>{{ account.phone }}</p>
-            
-              <p class="text-muted mb-0" style="font-size: 12px">Группа:</p>
-              <p>
-                {% if groups %}
-                    {% for group in groups %}
-                      {{ group.name }}
-                    {% endfor %}
-                {% endif %}
-              </p>
-              <p class="text-muted mb-0" style="font-size: 12px">Домашний адрес:</p>
-              <p>{{ account.address }}</p>
-              {% if account.gender != "" %}
-                <p class="text-muted mb-0" style="font-size: 12px">Пол:</p>
-                <p>{{ account.gender }}</p>
-              {% endif %}
-              
-              
+{% include "book-shop/book/includes/nav_bar.html" %}
+<div class="container h-100">
+  <div class="row" style=" border-bottom: 1px solid grey;margin-bottom: 2%; padding-top: 2%;">
+    <!-- Добавить группу -->
+    <span style="text-align: left; margin-bottom: -1.5%;font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;">Личные данные</span> <span style="text-align: right; margin-bottom: 0.5%;font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;">
+      {% if groups %}
+        {% for group in groups %}
+          {{ group.name }}
+        {% endfor %}
+      {% endif %}</span>
+  </div>
+  <div class="row" style="padding-bottom: 2%;">
+    {% if account.gender == 'Мужской' %}
+      <img src="/media/user/male.jpg" alt=" " style="height: 250px; width: 250px; margin-left: 15px;">
+    {% elif account.gender == 'Женский' %}
+      <img src="/media/user/female.jpg" alt=" " style="height: 250px; width: 250px; margin-left: 15px;">
+    {% else %}
+      {% comment %} КРЕСТИК {% endcomment %}
+    {% endif %}
+
+    <div class="col" style="margin-left: 2%;">
+      <div class="row" style="text-align: left; border-bottom: 1px solid grey; display: inline;">
+        <p>
+          {% if user.first_name != "" %}
+            <span style="font-size: 28px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;">{{ user.first_name }}</span>
           {% endif %}
-
-              <p class="text-muted mb-0" style="font-size: 12px">Персональные данные:</p>
-                {% if account.view_personal_info %}
-                  <p>Отображать</p>
-                {% else %}
-                  <p>Не отображать</p>
-                {% endif %}
-
-            <form action="{% url 'user_profile:update-account' user.id%}">
-              <button class="btn btn-outline-dark" >Изменить данные</button>
-            </form>
-            <br>
-            <form action="{% url 'staff:logout' %}">
-              <button class="btn btn-outline-danger" >Выйти, {{ user }}</button>
-            </form>
-
-            <p class="text-muted mb-0" style="font-size: 12px">Заказы:</p>
+          {% if user.last_name != "" %}
+            <span style="font-size: 28px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;">{{ user.last_name }}</span>
+          {% endif %}
+          |   
+          <a href="{% url 'user_profile:update-account' user.id%}" style=" text-decoration: none; color: grey;">Изменить данные</a>
+          |   
+          <a href="{% url 'staff:logout' %}" style=" text-decoration: none; color: grey;">Выйти</a>
+        </p>
+        {% if account.view_personal_info %}
+          <p style="color: green; border-bottom: 1px solid grey;"><ion-icon name="checkmark-circle-outline"></ion-icon> Отображать персональные данные</p>
+        {% else %}
+          <p style="color: grey; border-bottom: 1px solid grey;"><ion-icon name="close-circle-outline"></ion-icon> Не отображать персональные данные</p>
+        {% endif %}
+      </div>
+      <div class="row" style="text-align: left; border-bottom: 1px solid grey; margin-left: 0%;">
+        <p class="text-muted mb-0" style="font-size: 12px; margin-top:-2%">Логин</p>
+        <p>{{ user.username }}</p>
+      </div>
+      {% if account.view_personal_info %}
+      <div class="row" style="text-align: left; border-bottom: 1px solid grey; margin-left: 0%;">
+          <p class="text-muted mb-0" style="font-size: 12px; margin-top:2%">Email</p>
+          <p>{{ user.email }}</p>
+      </div>
+      {% else %}
+      <div class="row" style="text-align: left; margin-left: 0.5%;">
+        <p class="text-muted mb-0" style="font-size: 12px; margin-top:2%"></p>
+        <p></p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% if not account.view_personal_info%}
+  <div class="row" style="text-align: left;">
+    <p class="text-muted mb-0" style="font-size: 12px"></p>
+          <p></p>
+          <p style="margin-top:-1.5%"></p>
+  </div>
+  {% else %}
+  <div class="row" style="text-align: left; border-bottom: 1px solid grey;">
+    <p class="text-muted mb-0" style="font-size: 12px">Данные доставки</p>
+          <p>Телефон: {{ account.phone }}</p>
+          <p style="margin-top:-1.5%">Адрес доставки: {{ account.address }}</p>
+  </div>
+  {% endif %}
+  
+  <div class="row">
+    <p class=" mb-0" style="font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;color: black; text-align: left; margin-top: 1%; padding-bottom: 1%">История заказов:</p>
                 {% for order in orders %}
-                  
-                  <p>
+                  <p style=" margin-top: -1%; margin-bottom: -1%;">
                     {% if order.status == "В обработке" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
-                         <span style="margin-right: 50%;">Заказ №{{ order.id }}</span>
-                         <span>
+                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
+                        <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
+                        <span style="margin-left: 60%;">
                             В обработке
                            <ion-icon name="reload-outline"></ion-icon>
                          </span>
@@ -85,9 +164,9 @@
                     </a>
                     {% elif order.status == "Выполняется" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
-                         <span style="margin-right: 48%;">Заказ №{{ order.id }}</span>
-                         <span>
+                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
+                        <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
+                        <span style="margin-left: 60%;">
                             Выполняется
                             <ion-icon name="car-outline"></ion-icon>
                          </span>
@@ -95,9 +174,9 @@
                     </a>
                     {% elif order.status == "Доставлено" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
-                         <span style="margin-right: 50%;">Заказ №{{ order.id }}</span>
-                         <span>
+                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
+                         <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
+                         <span style="margin-left: 60%;">
                             Доставлено
                             <ion-icon name="chevron-down-circle-outline"></ion-icon>
                          </span>
@@ -105,9 +184,9 @@
                     </a>
                     {% elif order.status == "Отменен" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 80%; border-color: black;">
-                         <span style="margin-right: 54%;">Заказ №{{ order.id }}</span>
-                         <span>
+                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
+                        <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
+                        <span style="margin-left: 60%;">
                            Отменен
                             <ion-icon name="close-outline"></ion-icon>
                          </span>
@@ -121,10 +200,7 @@
 
 
             </div>
-        </div>
-      </div>
   </div>
-</div>
-
+  </div>
 {% endblock %}
 {% endblock BODY %}

@@ -13,6 +13,9 @@ User = get_user_model()
 class BookInOrder(models.Model):
     book = models.ForeignKey(to=Book, on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
+    
+    def get_total_price_in_order(self):
+        return self.count * self.book.book_price 
 
 
 class Cart(models.Model):
@@ -80,4 +83,11 @@ class Order(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def str(self):
-        return f"Order {self.id} by {self.user.username} on {self.created_at}"
+        return f"Order {self.id} by {self.user.username} on {self.created_at}"     
+     
+    def get_total_count_in_order(self):
+        total_count = 0
+        for book_in_cart in self.books.all():
+            count = book_in_cart.count
+            total_count +=  count
+        return total_count 
