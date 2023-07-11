@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from comments import urls as comments_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('s-admin/', admin.site.urls),
     path('directories/', include('directories.urls', namespace='directories')),
     path('staff/', include('staff.urls', namespace='staff')),
     path('cart/', include('cart.urls', namespace='cart')),

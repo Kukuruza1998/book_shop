@@ -56,7 +56,14 @@ p {
   background-color: rgb(38, 175, 95); 
   border-color: rgb(38, 175, 95);
 }
-
+.a-hover-views-book{
+  text-decoration:none;
+  color: grey
+}
+.a-hover-views-book:hover{
+  text-decoration:underline;
+  color: grey
+}
 
 </style>
 {% endblock HEAD %}
@@ -74,7 +81,7 @@ p {
         <h5 style="font-size: 2em; font-weight: 400; word-break: normal;">{{object.book_name}}
           <p>
           Автор: 
-          <a href="{% url 'search:search' %}?q={{ object.autor }}" style="color: grey;">
+          <a class="a-hover-views-book" href="{% url 'search:search' %}?q={{ object.autor }}">
             {{ object.autor }}  
           </a>
           </p>
@@ -116,14 +123,14 @@ p {
             {{object.book_price}} BYN
           </h5>
           <a href="#"
-            class="btn btn-danger" style ="margin: 0.1rem 0.1rem">Нет на складе</a>
+            class="btn btn-secondary" style ="margin: 0.1rem 0.1rem">Нет на складе</a>
         {% endif %}
         
         <p style="padding-top: 20px;">
         Серия: {{object.series}}
         </p>
         <p>
-        Жанр: <a href="{% url 'search:search' %}?q={{ object.genre }}" style="color: grey;">
+        Жанр: <a class="a-hover-views-book" href="{% url 'search:search' %}?q={{ object.genre }}">
                 {{ object.genre }}  
               </a>
         </p>
