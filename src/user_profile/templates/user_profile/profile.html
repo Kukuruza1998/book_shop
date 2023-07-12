@@ -72,6 +72,7 @@
     line-height: normal;">Личные данные</span> <span style="text-align: right; margin-bottom: 0.5%;font-size: 20px;
     font-style: normal;
     font-weight: 400;
+    font-size: 16px;
     line-height: normal;">
       {% if groups %}
         {% for group in groups %}
@@ -81,45 +82,49 @@
   </div>
   <div class="row" style="padding-bottom: 2%;">
     {% if account.gender == 'Мужской' %}
-      <img src="/media/user/male.jpg" alt=" " style="height: 250px; width: 250px; margin-left: 15px;">
+      <img src="/media/user/male.jpg" alt=" " style="height: 200px; width: 200px; margin-left: 10px; margin-top: 0.5%;">
     {% elif account.gender == 'Женский' %}
-      <img src="/media/user/female.jpg" alt=" " style="height: 250px; width: 250px; margin-left: 15px;">
+      <img src="/media/user/female.jpg" alt=" " style="height: 200px; width: 200px; margin-left: 10px; margin-top: 0.5%;">
     {% else %}
       {% comment %} КРЕСТИК {% endcomment %}
     {% endif %}
 
-    <div class="col" style="margin-left: 2%;">
+    <div class="col" style="margin-top: -1.5%;">
       <div class="row" style="text-align: left; border-bottom: 1px solid grey; display: inline;">
-        <p>
+        <p style="color: grey;">
           {% if user.first_name != "" %}
-            <span style="font-size: 28px;
+            <span style="font-size: 24px;
             font-style: normal;
             font-weight: 700;
-            line-height: normal;">{{ user.first_name }}</span>
+            line-height: normal; color: black;">{{ user.first_name }}</span>
           {% endif %}
           {% if user.last_name != "" %}
-            <span style="font-size: 28px;
+            <span style="font-size: 24px;
             font-style: normal;
             font-weight: 700;
-            line-height: normal;">{{ user.last_name }}</span>
+            line-height: normal; color: black;">{{ user.last_name }}</span>
           {% endif %}
-          |   
-          <a href="{% url 'user_profile:update-account' user.id%}" style=" text-decoration: none; color: grey;">Изменить данные</a>
-          |   
-          <a href="{% url 'staff:logout' %}" style=" text-decoration: none; color: grey;">Выйти</a>
+          |
+          <a href="{% url 'user_profile:update-account' user.id%}" style=" text-decoration: none; color: grey;">
+          <ion-icon name="pencil-outline"></ion-icon> Изменить данные</a>
+          |
+          <a href="{% url 'staff:logout' %}" style=" text-decoration: none; color: grey;">
+          <ion-icon name="exit-outline"></ion-icon> Выйти</a>
         </p>
         {% if account.view_personal_info %}
-          <p style="color: green; border-bottom: 1px solid grey;"><ion-icon name="checkmark-circle-outline"></ion-icon> Отображать персональные данные</p>
+          <p style="color: green; border-bottom: 1px solid grey; margin-top: -1%; padding-bottom: 1%;">
+          <ion-icon name="checkmark-circle-outline" style="margin-bottom: -0.5%; font-size: 22px;"></ion-icon> Отображать персональные данные</p>
         {% else %}
-          <p style="color: grey; border-bottom: 1px solid grey;"><ion-icon name="close-circle-outline"></ion-icon> Не отображать персональные данные</p>
+          <p style="color: grey; border-bottom: 1px solid grey; margin-top: -1%; padding-bottom: 1%;">
+          <ion-icon name="close-outline" style=" font-size: 24px; color: brown; margin-bottom: -0.5%;"></ion-icon> Не отображать персональные данные</p>
         {% endif %}
       </div>
-      <div class="row" style="text-align: left; border-bottom: 1px solid grey; margin-left: 0%;">
-        <p class="text-muted mb-0" style="font-size: 12px; margin-top:-2%">Логин</p>
+      <div class="row" style="text-align: left; border-bottom: 1px solid grey; margin-left: 0%; margin-top: -1%; padding-bottom: -1%;">
+        <p class="text-muted mb-0" style="font-size: 12px; margin-top:-2%;">Логин</p>
         <p>{{ user.username }}</p>
       </div>
       {% if account.view_personal_info %}
-      <div class="row" style="text-align: left; border-bottom: 1px solid grey; margin-left: 0%;">
+      <div class="row" style="text-align: left; border-bottom: 1px solid grey; margin-left: 0%; margin-top: -1%; padding-bottom: -1%;">
           <p class="text-muted mb-0" style="font-size: 12px; margin-top:2%">Email</p>
           <p>{{ user.email }}</p>
       </div>
@@ -146,17 +151,17 @@
   {% endif %}
   
   <div class="row">
-    <p class=" mb-0" style="font-size: 20px;
+    <p class=" mb-0" style="font-size: 18px;
     font-style: normal;
     font-weight: 700;
-    line-height: normal;color: black; text-align: left; margin-top: 1%; padding-bottom: 1%">История заказов:</p>
+    line-height: normal; color: black; text-align: left; margin-top: 1%; padding-bottom: 1%">История заказов:</p>
                 {% for order in orders %}
                   <p style=" margin-top: -1%; margin-bottom: -1%;">
                     {% if order.status == "В обработке" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
-                        <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
-                        <span style="margin-left: 60%;">
+                      <div class="btn" style="height: 40px; width: 100%; background-color: #E4E4E4; border-color: #E4E4E4; text-align: left;">
+                        <span style="margin-left: 2%;">Заказ №{{ order.id }}</span>
+                        <span style="margin-left: 80%;">
                             В обработке
                            <ion-icon name="reload-outline"></ion-icon>
                          </span>
@@ -164,9 +169,9 @@
                     </a>
                     {% elif order.status == "Выполняется" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
-                        <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
-                        <span style="margin-left: 60%;">
+                      <div class="btn" style="height: 40px; width: 100%; background-color: #E4E4E4; border-color: #E4E4E4; text-align: left;">
+                        <span style="margin-left: 2%;">Заказ №{{ order.id }}</span>
+                        <span style="margin-left: 80%;">
                             Выполняется
                             <ion-icon name="car-outline"></ion-icon>
                          </span>
@@ -174,9 +179,9 @@
                     </a>
                     {% elif order.status == "Доставлено" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
-                         <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
-                         <span style="margin-left: 60%;">
+                      <div class="btn" style="height: 40px; width: 100%; background-color: #E4E4E4; border-color: #E4E4E4; text-align: left;">
+                         <span style="margin-left: 2%;">Заказ №{{ order.id }}</span>
+                         <span style="margin-left: 80%;">
                             Доставлено
                             <ion-icon name="chevron-down-circle-outline"></ion-icon>
                          </span>
@@ -184,9 +189,9 @@
                     </a>
                     {% elif order.status == "Отменен" %}
                     <a href="{% url 'cart:order_details' order.id %}" style="text-decoration: none; color: black;">
-                      <div class="btn" style="height: 40px; width: 100%; border-color: black;text-align: left;">
-                        <span style="margin-left: 10%;">Заказ №{{ order.id }}</span>
-                        <span style="margin-left: 60%;">
+                      <div class="btn"style="height: 40px; width: 100%; background-color: #E4E4E4; border-color: #E4E4E4; text-align: left;">
+                        <span style="margin-left: 2%;">Заказ №{{ order.id }}</span>
+                        <span style="margin-left: 80%;">
                            Отменен
                             <ion-icon name="close-outline"></ion-icon>
                          </span>

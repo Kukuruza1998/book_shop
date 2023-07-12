@@ -48,7 +48,7 @@
 <div>
   {% include './carusel.html' %}
   <a name="book"></a>
-  {% if user.is_superuser %}
+  {% if  'Managers' in user.groups.all|join:', '  %}
     <!-- Форма для добавления новой книги -->
     <form action="{% url 'directories:create-book' %}">
       <button class="btn btn-primary">Добавить</button>

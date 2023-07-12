@@ -54,7 +54,7 @@
 {% block BODY %}
 {% include '../book/includes/nav_bar.html' %}
 
-  {% if user.is_superuser %}
+{% if  'Managers' in user.groups.all|join:', '  %}
     <form action="{% url 'directories:create-series' %}">
       <button class="btn btn-primary">Добавить</button>
     </form>
@@ -88,7 +88,7 @@
         <span style="margin-left: 55px; display: inline-block;">{{ object.series_description }}</span>
         
       </td>
-      {% if user.is_superuser %}
+      {% if  'Managers' in user.groups.all|join:', '  %}
         <td>
           <a href="{% url 'directories:update-series' pk=object.pk %}" 
             style ="margin-left:5%">Изменить</a>

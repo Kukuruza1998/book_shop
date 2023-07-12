@@ -54,7 +54,7 @@
 {% block BODY %}
 {% include '../book/includes/nav_bar.html' %}
 
-  {% if user.is_superuser %}
+  {% if  'Managers' in user.groups.all|join:', '  %}
     <form action="{% url 'directories:add-autors' %}">
       <button class="btn btn-primary">Добавить</button>
     </form>
@@ -68,8 +68,8 @@
   <table class="table">
     <thead>
       <tr style="font-size: 28px; text-align: left;">
-        <th style="width: 30%;"><span style="margin-left: 55px;">Автор</span></th>
-        <th style="width: 70%;"><span style="margin-left: 55px;">Биография</span></th>
+        <th style="width: 30%;"><span style="margin-left: 55px;">Автор </span></th>
+        <th style="width: 70%;"><span style="margin-left: 55px;">Биография </span></th>
         <th style="width: 20%;"></th>
         <th></th>
       </tr>
@@ -93,7 +93,7 @@
         <img src="{{ object.autor_image.url }}" alt="asd ">
       </td> {% endcomment %}
       {% comment %} /IMG {% endcomment %}
-      {% if user.is_superuser %}
+      {% if  'Managers' in user.groups.all|join:', '  %}
         <td>
           <a href="{% url 'directories:update-autors' pk=object.pk %}" 
             style ="margin-left:5%">Изменить</a>

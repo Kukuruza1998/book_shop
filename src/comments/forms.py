@@ -8,5 +8,5 @@ class CommentForm(forms.ModelForm):
         fields = ('text', 'rating',)
         labels = {
             'text': 'Текст комментария',
-            'rating': 'Оценка(0-10)',
+            'rating': 'Оценка (0-10)',
         }

@@ -11,7 +11,7 @@
   <a href="{% url "directories:genre-list-view" %}" class="btn btn-outline-dark" id="genres" style="height: 40px; width: 12%; border-radius:0; margin-right: 0.5%;">
       Жанры
   </a>
-{% if user.is_superuser %}
+  {% if  'Managers' in user.groups.all|join:', '  %}
   <a href="{% url "cart:orders_all" %}" class="btn btn-outline-dark" id="zakaz" style="height: 40px; width: 48.6%; border-radius:0;">
        Управление заказами
   </a>

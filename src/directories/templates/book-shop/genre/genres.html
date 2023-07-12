@@ -107,7 +107,7 @@
 {% block BODY %}
 {% include '../book/includes/nav_bar.html' %}
 
-  {% if user.is_superuser %}
+{% if  'Managers' in user.groups.all|join:', '  %}
     <form action="{% url 'directories:create-genre' %}">
       <button class="btn btn-primary">Добавить</button>
     </form>
@@ -138,7 +138,7 @@
                     </p>
                   </h5>
                 </div>
-                {% if user.is_superuser %}
+                {% if  'Managers' in user.groups.all|join:', '  %}
                   <p id="find-book">
                     <a href="{% url 'directories:update-genre' pk=object.pk %}">
                       Изменить

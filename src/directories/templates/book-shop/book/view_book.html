@@ -119,11 +119,11 @@ p {
           {% endif %}
           
         {% else %} 
-          <h5 style="color: darkgrey;">
+          <h5 style="color: grey;">
             {{object.book_price}} BYN
           </h5>
           <a href="#"
-            class="btn btn-secondary" style ="margin: 0.1rem 0.1rem">Нет на складе</a>
+            class="btn btn-secondary" style ="margin: 0.1rem 0.1rem; pointer-events: none; background-color: #E4E4E4; border-color: #E4E4E4; color: darkgrey;">Нет на складе</a>
         {% endif %}
         
         <p style="padding-top: 20px;">
@@ -164,22 +164,20 @@ p {
 
 
 
-        {% if user.is_superuser %}
+        {% if  'Managers' in user.groups.all|join:', '  %}
         <p style="color: #0d6efd; font-weight: 600;">
           Доступна: {{object.active}}
         </p>
         {% endif %}
         
-      {% if user.is_superuser %}
+        {% if  'Managers' in user.groups.all|join:', '  %}
         <a href="{% url 'directories:update-book' pk=object.pk %}" 
           class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Изменить</a>
 
-        {% if user.is_superuser %}
+
           <a href="{% url 'directories:delete-book' pk=object.pk %}" 
             class="btn btn-primary" style ="margin: 0.1rem 0.1rem">Удалить</a>
         {% endif %}
-
-      {% endif %}
     </div>
     <div style="bottom: 0; text-align: left; margin-top: 80px;">
       

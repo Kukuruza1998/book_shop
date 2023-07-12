@@ -130,7 +130,7 @@
                   <input type="hidden" name="item_id" value="{{ book.id }}">
   
                   <!-- КНОПКА КОЛИЧЕСТВА -->
-                  <button class="btn border-danger" style=" color: #dc3545; border-radius: 15px; margin-left: -45%; margin-bottom: -30%; width: 220px;">
+                  <button class="btn border-danger" style="background-color: #E4E4E4; color: gray; border: #E4E4E4; border-radius: 20px; margin-left: -45%; margin-bottom: -30%; width: 220px;">
                     Обновить стоимость
                   </button>
                 </form>
@@ -142,8 +142,8 @@
                 {% csrf_token %}
                   <input type="hidden" name="item_id" value="{{ book.id }}">
                   <button class="btn btn-light" type="submit"
-                    style="background-color: white; border-color: white; color: grey; height: 20px; margin-top: -25%;">
-                    <ion-icon name="trash-outline"></ion-icon>
+                    style="background-color: white; border-color: white; color: grey; height: 20px; margin-top: -17%;">
+                    <ion-icon name="close-outline" style="font-size: 24px;"></ion-icon>
                   </button>
                 </form>
   
@@ -254,9 +254,9 @@
   <input type="hidden" name="item_id" value="">
 </form>
 {% else %}
-        <div style="text-align: center; height: 200px; margin-top: 20%;">
-          <h2>Ваша корзина пуста <ion-icon name="bag-remove-outline" style="top: 1%;"></ion-icon></h2>
-          <a href="/" style="color: grey;"> За покупками!</a> 
+        <div style="text-align: center; height: 200px; margin-top: 15%;">
+          <h3>Ваша корзина пуста <ion-icon name="bag-handle-outline" style="top: 1%"></ion-icon></ion-icon></h3>
+          <a href="/" style="color: seagreen;"> За покупками!</a> 
         </div>
       {% endif %} 
 </div>

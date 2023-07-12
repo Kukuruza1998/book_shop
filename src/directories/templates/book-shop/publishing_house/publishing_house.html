@@ -42,13 +42,12 @@
           </p>
         </div>
 
-        {% if user.is_authenticated %}
+        {% if  'Managers' in user.groups.all|join:', '  %}
         <a href="{% url 'directories:update-publishing-house' pk=object.pk %}" 
           class="btn btn-primary" style ="margin: .1rem .1rem">Изменить</a>
-          {% if user.is_superuser %}
+
             <a href="{% url 'directories:delete-publishing-house' pk=object.pk %}" 
               class="btn btn-primary" style ="margin: .1rem .1rem">Удалить</a>
-          {% endif %}
         {% endif %}
         
       </div>

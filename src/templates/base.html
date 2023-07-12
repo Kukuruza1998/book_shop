@@ -63,7 +63,7 @@
 {% comment %} search {% endcomment %}
         {% if user.is_authenticated %}
         <!-- Курс по нац банку -->
-        <iframe src="https://www.nbrb.by/statistics/rates/banner.asp?lan=ru&datatype=0
+        <iframe src="https://www.nbrb.by/statistics/rates/banner.asp?lan=ru&datatype=1
           &fnt=Tahoma, Arial&fntsize=9.5px&fntcolor=black
           &lnkcolor=seagreen&bgcolor=white&brdcolor=white"
           width=180px height=85px scrolling=no frameborder=0 style="margin: 0 10px 0 0;"></iframe>
@@ -89,7 +89,7 @@
           </form>
         {% else %}
         <!-- Курс по нац банку -->
-        <iframe src="https://www.nbrb.by/statistics/rates/banner.asp?lan=ru&datatype=0
+        <iframe src="https://www.nbrb.by/statistics/rates/banner.asp?lan=ru&datatype=1
           &fnt=Tahoma, Arial&fntsize=9.5px&fntcolor=black
           &lnkcolor=seagreen&bgcolor=white&brdcolor=white"
           width=180px height=85px scrolling=no frameborder=0 style="margin: 0 50px 0 0;"></iframe>
@@ -107,11 +107,11 @@
 
 <!-- Begin page content -->
 <main class="flex-shrink-0">
-  {% if user.is_superuser %}
-  <div style= "box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 6.6% auto 0; max-width: 90%; 
+  {% if  'Managers' in user.groups.all|join:', '  %}
+  <div style= "box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 7% auto 2%; max-width: 90%; 
     min-height: 100%; text-align: center; font-family:Arial, Helvetica, sans-serif;">
   {% else %}
-  <div style= "box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 6.3% auto 0; max-width: 90%; 
+  <div style= "box-shadow: 0 4px 6px rgba(0,0,0,0.2); margin: 6.8% auto 2%; max-width: 90%; 
     min-height: 100%; text-align: center; font-family:Arial, Helvetica, sans-serif;">
   {% endif %}
   
@@ -172,6 +172,36 @@
   </div>
 
 </main>
+<footer class="footer mt-auto py-5 " style=" width: 90.2%; margin-left: 4.9%; background: #E4E4E4;box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+  <div class="container">
+    <div class="row">
+      <div class="col" style="text-align: left;">
+        <p style="font-size: 40px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal; margin-left: 15%;">123-45-67</p>
+        <p style="font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal; margin-left: 15%; margin-top: -5%;">МТС, A1, life:)</p>
+      </div>
+      <div class="col" style="text-align: left;">
+        <p style=" margin-left: 0%;font-size: 14px;">ПЛАТИТЕ БЕЗОПАСНО И УДОБНО</p>
+        <p style=" margin-left: 0%; margin-top: -3%;">
+          <img src="/media/footer/Mastercard.png" alt=" " style=" height: 25px;">
+          <img src="/media/footer/Visa.png" alt=" " style=" height: 25px;">
+          <img src="/media/footer/PayPal1.png" alt=" " style=" height: 25px;">
+          <img src="/media/footer/PayPal2.png" alt=" " style=" height: 25px;">
+        </p>
+      </div>
+      <div class="col" style="text-align: left;font-size: 14px;">
+        <p>ООО "Книга в дом", 2013-2023</p>
+        <p style="margin-top: -3%;">В торговом реесте Республики Беларусь с 14 мая 2007 года</p>
+        <p style="margin-top: -4%;">Дизайн-Mari company</p>
+      </div>
+    </div>
+  </div>
+</footer>
 <script src="{% static "/js/bootstrap.bundle.min.js" %}"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
